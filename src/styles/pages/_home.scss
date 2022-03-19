@@ -5,7 +5,7 @@
 
 body {
   background: {
-    image: url("../../imgs/graphic-makeacity_watermark@2x.png");
+    image: url("../images/graphic-makeacity_watermark@2x.png");
     position: bottom right;
     size: 80%;
     repeat: no-repeat;
@@ -168,7 +168,7 @@ body {
     margin-bottom: .5em;
 
     &:after {
-      content: url("../../imgs/tick.svg");
+      content: url("../images/tick.svg");
       margin-left: 1em;
     }
   }
@@ -236,7 +236,7 @@ body {
 .mc-copy-btn {
   background: {
     color: transparent;
-    image: url("../../imgs/copy.svg");
+    image: url("../images/copy.svg");
     size: contain;
   };
   border: none;
@@ -258,7 +258,7 @@ body {
 // mc-kharkiv
 .mc-kharkiv {
   background: {
-    image: url("../../imgs/graphic-2circunferences@2x.png");
+    image: url("../images/graphic-2circunferences@2x.png");
     size: cover;
     repeat: no-repeat;
     position: center;
