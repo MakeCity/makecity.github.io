@@ -1,0 +1,356 @@
+/* Home
+* ===============
+*
+* Place all your home page declarations here */
+
+body {
+  background: {
+    image: url("../../imgs/graphic-makeacity_watermark@2x.png");
+    position: bottom right;
+    size: 80%;
+    repeat: no-repeat;
+  };
+}
+
+.mc-slide {
+  position: relative;
+  opacity: .3;
+
+  &.glide__slide--active {
+    opacity: 1;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    min-height: 280px;
+    max-height: 450px;
+
+    @media (min-width: 64em) {
+      height: 85vh;
+      max-height: none;
+    }
+  }
+
+  .mc-hero__content {
+    position: absolute;
+    color: #fff;
+    top: 50%;
+    left: 82px;
+    transform: translateY(-50%);
+    width: 60%;
+
+    @media screen and (max-width: 48em) {
+      padding: 50px 39px 39px;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      transform: none;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .mc-hero__title {
+        font-size: 2rem;
+      }
+
+      .mc-hero__text {
+        font-size: 1.25rem;
+      }
+
+      .mc-donate-button {
+        display: none;
+      }
+    }
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0, .5);
+  }
+}
+
+.mc-head-wrapper {
+  text-align: center;
+  padding: 142px 0 90px;
+}
+
+// mc-help
+.mc-help-section {
+  padding-bottom: 150px;
+  overflow: hidden;
+
+  .mc-head-wrapper {
+    margin-bottom: 73px;
+  }
+
+  .with-arrow {
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: -103%;
+      left: -300px;
+      width: calc(100% + 300px);
+      height: auto;
+      pointer-events: none;
+
+      @media screen and (min-width: 48em) {
+        top: -148%;
+        left: 0;
+        width: 100%;
+        height: 869px;
+      }
+
+      @media screen and (min-width: 64em) {
+        top: -148%;
+        left: -161%;
+        width: auto;
+      }
+    }
+  }
+}
+
+.mc-help {
+  text-align: center;
+  margin-bottom: 2em;
+
+  @media screen and (min-width: 64em) {
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  &__size {
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 112px;
+    color: $primary-color;
+    margin-bottom: 15px;
+
+    sup {
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 30px;
+      vertical-align: text-top;
+      top: unset;
+    }
+  }
+
+  &__desc {
+    font-size: 26px;
+    line-height: 30px;
+    max-width: 200px;
+    margin: {
+      right: auto;
+      left: auto;
+    };
+
+    @media screen and (min-width: 64em) {
+      max-width: 135px;
+      margin: {
+        right: 0;
+        left: 0;
+      };
+    }
+  }
+
+  &__count {
+    display: block;
+    font-weight: 500;
+    margin-bottom: .5em;
+
+    &:after {
+      content: url("../../imgs/tick.svg");
+      margin-left: 1em;
+    }
+  }
+}
+
+// mc-donate
+.mc-donate {
+  padding-bottom: 100px;
+  @media screen and (min-width: 64em) {
+    padding-bottom: 140px;
+
+    .mc-head-wrapper {
+      padding: 80px 0;
+    }
+  }
+
+  .container {
+    @media screen and (min-width: 64em) {
+      max-width: 960px;
+    }
+  }
+
+  dt {
+    font-size: 1.5em;
+  }
+  dd {
+    margin-bottom: 1.5em;
+  }
+
+  &-info {
+    text-align: center;
+
+    @media screen and (min-width: 48em) and (max-width: 64em) {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    @media screen and (min-width: 64em) {
+      text-align: left;
+    }
+
+    &__bank-description {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+      margin-bottom: 60px;
+
+      img {
+        display: inline-block;
+        max-width: 150px;
+      }
+
+      @media screen and (min-width: 64em) {
+        flex-direction: row;
+        margin-bottom: 0;
+
+        img + img {
+          margin-left: 28px;
+        }
+      }
+    }
+  }
+}
+
+.mc-copy-btn {
+  background: {
+    color: transparent;
+    image: url("../../imgs/copy.svg");
+    size: contain;
+  };
+  border: none;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity .3s;
+
+  &:hover {
+    opacity: .5;
+  }
+
+  &:active {
+    opacity: .75;
+  }
+}
+
+// mc-kharkiv
+.mc-kharkiv {
+  background: {
+    image: url("../../imgs/graphic-2circunferences@2x.png");
+    size: cover;
+    repeat: no-repeat;
+    position: center;
+  };
+  height: 500px;
+
+  @media screen and (min-width: 48em) {
+    background: {
+      size: contain;
+      position: center;
+    };
+  }
+
+  @media screen and (min-width: 64em) {
+
+    height: 80vh;
+
+    &-head {
+      width: 55%;
+    }
+    &__title {
+      font-size: 96px;
+    }
+    &__text {
+      font-size: 26px;
+    }
+  }
+}
+
+// mc-socials
+.mc-social-wrapper {
+  color: #B0B0B0;
+}
+
+.mc-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__item {
+    margin-left: 28px;
+  }
+}
+
+.mc-social-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 178px 0 122px;
+
+  @media screen and (min-width: 64em) {
+    flex-direction: row;
+    padding: 211px 0 190px;
+  }
+}
+
+.mc-donation-plans {
+  padding-bottom: 60px;
+
+  @media screen and (min-width: 64em) {
+    padding-bottom: 140px;
+  }
+}
+.mc-donate-button {
+  width: 343px;
+  height: 103px;
+  background: $primary-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 900;
+  box-shadow: 16px 16px #f8d456;
+  transition: box-shadow .3s, color .3s;
+
+  &:hover,
+  &:focus {
+    color: rgba(255, 255, 255, .6);
+    text-decoration: none;
+    box-shadow: 0px 16px #f8d456;
+  }
+  &--mobile {
+    display: none;
+
+    @media screen and (max-width: 48em) {
+      display: flex;
+      width: calc(100% - 48px);
+      margin: 0 16px;
+    }
+  }
+}
+
+

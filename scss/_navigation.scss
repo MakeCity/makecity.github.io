@@ -1,0 +1,54 @@
+/* Fonts
+* ===============
+*
+* Place all your font declarations here */
+
+.mc-header {
+  padding: 37px 0 26px;
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mc-logo {
+    display: inline-block;
+
+    img {
+      display: inline-block;
+      height: 56px;
+    }
+  }
+}
+
+.mc-lang {
+  &__list {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: end;
+    list-style: none;
+
+    @media screen and (min-width: 64em) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__item {
+    font-size: 14px;
+
+    @media screen and (min-width: 48em) {
+      font-size: 26px;
+    }
+
+    line-height: 1.17;
+    font-weight: 900;
+    color: #B0B0B0;
+  }
+
+  &__item + &__item{
+    margin-left: .5em;
+  }
+}
