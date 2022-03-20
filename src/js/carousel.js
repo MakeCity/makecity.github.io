@@ -30,8 +30,8 @@ const CAROUSEL_OPTIONS = {
   },
 };
 
-function create() {
+function initHeroCarousel() {
   new Glide('.glide', CAROUSEL_OPTIONS).mount()
 }
 
-window.addEventListener('load', create)
+window.addEventListener('load', initHeroCarousel)
