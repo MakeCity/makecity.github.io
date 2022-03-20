@@ -1,7 +1,10 @@
 import Glide from '@glidejs/glide'
 
-new Glide('.glide', {
+const CAROUSEL_OPTIONS = {
   type: 'carousel',
+  autoplay: 3000,
+  animationDuration: 1000,
+  animationTimingFunc: 'ease-out',
   startAt: 1,
   perView: 1,
   gap: 33,
@@ -25,4 +28,10 @@ new Glide('.glide', {
       },
     },
   },
-}).mount()
+};
+
+function initHeroCarousel() {
+  new Glide('.glide', CAROUSEL_OPTIONS).mount()
+}
+
+window.addEventListener('load', initHeroCarousel)
