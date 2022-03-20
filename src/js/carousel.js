@@ -3,7 +3,8 @@ import Glide from '@glidejs/glide'
 const CAROUSEL_OPTIONS = {
   type: 'carousel',
   autoplay: 3000,
-  animationDuration: 1500,
+  animationDuration: 1000,
+  animationTimingFunc: 'ease-out',
   startAt: 1,
   perView: 1,
   gap: 33,
