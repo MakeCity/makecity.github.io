@@ -40,118 +40,25 @@
   </div>
 </header>
 <!-- HEADER-->
+<div id="myEntries">{{test}}</div>
 
 <main>
   <!--  HERO SECTION  -->
-  <section class="mc-hero">
+  <section id="hero" class="mc-hero">
     <!--    SLIDER     -->
     <div class="mc-slider glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
+          {{#slides}}
           <li class="glide__slide mc-slide">
-            <img src="images/content/mirror_stream.jpg" alt="Kharkiv photo" class="mc-slide__img">
+            <img src={{fields.slideImage.fields.file.url}} alt="Kharkiv photo" class="mc-slide__img">
             <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
+              <h1 class="mc-hero__title">{{fields.slideTitle}}</h1>
+              <p class="mc-hero__text">{{fields.slideDescription}}</p>
               <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
             </div>
           </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Opera_and_Ballet_Theater_Kharkiv.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_1.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_2.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_3.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_4.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_5.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_6.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_7.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_8.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_9.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_10.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_11.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
+          {{/slides}}
         </ul>
       </div>
     </div>
