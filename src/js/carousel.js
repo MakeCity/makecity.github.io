@@ -2,6 +2,11 @@ import Glide from '@glidejs/glide'
 
 new Glide('.glide', {
   type: 'carousel',
+  autoplay: 5000,
+  hoverpause: false,
+  swipeThreshold: false,
+  dragThreshold: false,
+  keyboard: false,
   startAt: 1,
   perView: 1,
   gap: 33,

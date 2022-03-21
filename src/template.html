@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= languages.default %>">
 <head>
-  <title>Make the City</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="description" content="">
-  <meta name="robots" content="noindex,nofollow">
+  <% headTags.forEach(function(tag) { %>
+    <%- tag %>
+  <% }); %>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,18 +18,17 @@
   <div class="container">
     <div class="mc-header-wrapper">
       <a href="/" class="mc-logo">
-        <img src="images/Logo-makeacity.svg" alt="зроби місто">
+        <img src="images/Logo-makeacity.svg" alt="Make the city">
       </a>
 
       <!--  LANG LIST    -->
-      <nav class="mc-lang">
+      <nav class="mc-lang" id="language-switcher">
         <ul class="mc-lang__list">
-          <li class="mc-lang__item">
-            <span class="mc-lang__link mc-lang__link--current">English</span>
-          </li>
-          <li class="mc-lang__item">
-            <a href="" class="mc-lang__link">український</a>
-          </li>
+          <% languages.list.forEach(function(language) { %>
+            <li class="mc-lang__item">
+              <a href='' class="mc-lang__link <%- language.code === languages.default ? 'mc-lang__link--current' : '' %>" data-lang="<%= language.code %>"><%= language.name %></a>
+            </li>
+          <%}); %>
         </ul>
       </nav>
       <!--  LANG LIST    -->
@@ -44,33 +41,25 @@
   <!--  HERO SECTION  -->
   <section class="mc-hero">
     <!--    SLIDER     -->
+    <div class="mc-hero__content">
+      <h1 class="mc-hero__title">
+        <%- include('./localize-text-template', { enText: localizedContent.en.cityCarousel.title, ukText: localizedContent.uk.cityCarousel.title }); %>
+      </h1>
+      <p class="mc-hero__text">
+        <%- include('./localize-text-template', { enText: localizedContent.en.cityCarousel.description, ukText: localizedContent.uk.cityCarousel.description }); %>
+      </p>
+      <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">
+        <%- include('./localize-text-template', { enText: localizedContent.en.cityCarousel.donateButton.text, ukText: localizedContent.uk.cityCarousel.donateButton.text }); %>
+      </a>
+    </div>
     <div class="mc-slider glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
+          <% cityCarousel.slides.forEach(function(slide) { %>
           <li class="glide__slide mc-slide">
-            <img src="images/mirror_stream.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
+            <img src="images/<%- slide.image %>" alt="Kharkiv photo" class="mc-slide__img">
           </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/Opera_and_Ballet_Theater_Kharkiv.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/mirror_stream.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
+          <%}); %>
         </ul>
       </div>
     </div>
@@ -83,84 +72,29 @@
   <section class="mc-help-section">
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2 class="">How we’ve already helped</h2>
+        <h2 class="">
+          <%- include('./localize-text-template', { enText: localizedContent.en.alreadyHelpedSection.title, ukText: localizedContent.uk.alreadyHelpedSection.title }); %>
+        </h2>
       </div>
 
       <div class="row">
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">50</span>
-            <p class="mc-help__desc">body armours + <br>helmets</p>
-          </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">20</span>
-            <p class="mc-help__desc">drones</p>
-          </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">
-              50
-              <sup>ton</sup>
-            </span>
-            <p class="mc-help__desc">of humanitarian aid</p>
-          </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">
-              2
-              <sup>ton</sup>
-            </span>
-            <p class="mc-help__desc">of medicine</p>
-          </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
+          <% for (const key of Object.keys(localizedContent.en.alreadyHelpedSection.purchasedAids.list)) { %>
+            <% var aidListItemEn = localizedContent.en.alreadyHelpedSection.purchasedAids.list[key]; %>
+            <% var aidListItemUk = localizedContent.uk.alreadyHelpedSection.purchasedAids.list[key]; %>
+            <div class="col-12 col-sm-6 col-md-3 with-arrow">
+                <!--    HELP-ITEM      -->
+                <div class="mc-help">
+                  <span class="mc-help__size">
+                    <%- include('./localize-text-template', { enText: aidListItemEn.amountText, ukText: aidListItemUk.amountText }); %>
+                  </span>
+                  <p class="mc-help__desc">
+                    <%- include('./localize-text-template', { enText: aidListItemEn.productText, ukText: aidListItemUk.productText }); %>
+                  </p>
+                </div>
+                <img src="images/graphic-arrow.svg" alt="graphic arrow">
+                <!--    HELP-ITEM      -->
+            </div>
+          <% } %>
       </div>
     </div>
   </section>
@@ -170,8 +104,12 @@
   <section id="donate" class="mc-donate">
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2>How to donate</h2>
-        <p>If you want to help please send your donations to card details:</p>
+        <h2>
+          <%- include('./localize-text-template', { enText: localizedContent.en.donateSection.title, ukText: localizedContent.uk.donateSection.title }); %>
+        </h2>
+        <p>
+          <%- include('./localize-text-template', { enText: localizedContent.en.donateSection.description, ukText: localizedContent.uk.donateSection.description }); %>
+        </p>
       </div>
 
       <div class="row">
@@ -179,7 +117,9 @@
           <div class="mc-donate-info">
             <img src="images/card.svg" alt="card icon">
 
-            <h3>Beneficiary</h3>
+            <h3>
+              <%- include('./localize-text-template', { enText: localizedContent.en.donateSection.beneficiary.title, ukText: localizedContent.uk.donateSection.beneficiary.title }); %>
+            </h3>
 
             <dl>
               <dt>IBAN</dt>
@@ -199,15 +139,11 @@
                 John Doe, <address> 61000, Ukraine, reg. Kharkivska, c. Kharkiv, str. Whatever, build. 00, fl. 00</address>
                 <button class="mc-copy-btn" data-copy="John Doe, 61000, Ukraine, reg. Kharkivska, c. Kharkiv, str. Whatever, build. 00, fl. 00" title="copy"></button>
               </dd>
-
-              <dt>Receiver</dt>
-              <dd>
-                00000000000000
-                <button class="mc-copy-btn" data-copy="00000000000000" title="copy"></button>
-              </dd>
             </dl>
 
-            <h4>Account with Institution</h4>
+            <h4>
+              <%- include('./localize-text-template', { enText: localizedContent.en.donateSection.beneficiary.beneficiaryBankTitle, ukText: localizedContent.uk.donateSection.beneficiary.beneficiaryBankTitle }); %>
+            </h4>
 
             <dl>
               <dt>Bank</dt>
@@ -240,26 +176,11 @@
           <div class="mc-donate-info">
             <img src="images/Info.svg" alt="info icon">
 
-            <h3>Details of payment</h3>
-            <p>
-              ⚠️<br>
-              It’s very important to specify the purpose of the payment correctly. Choose the option you want depending on who sent you the payment
-              if the sender is an individual:
-            </p>
+            <h3>
+              <%- include('./localize-text-template', { enText: localizedContent.en.donateSection.paymentDetails.title, ukText: localizedContent.uk.donateSection.paymentDetails.title }); %>
+            </h3>
 
-            <ul>
-              <li>👉 private transfer</li>
-              <li>👉 transfer to own account</li>
-              <li>👉 help to relative</li>
-            </ul>
-
-            <p>if the sender is a legal entity:</p>
-
-            <ul>
-              <li>👉 honorarium</li>
-              <li>👉 compensation for ...</li>
-            </ul>
-
+            <%- include('./localize-text-template', { enText: localizedContent.en.donateSection.paymentDetails.text, ukText: localizedContent.uk.donateSection.paymentDetails.text }); %>
           </div>
         </div>
       </div>
@@ -270,8 +191,12 @@
   <!--  Kharkiv SECTION  -->
   <section class="mc-kharkiv d-flex center middle">
     <div class="mc-kharkiv-head">
-      <h2 class="mc-kharkiv__title">Make the city, make Kharkiv</h2>
-      <p class="mc-kharkiv__text">Let’s save heroic Kharkiv together!</p>
+      <h2 class="mc-kharkiv__title">
+        <%- include('./localize-text-template', { enText: localizedContent.en.makeTheCitySection.title, ukText: localizedContent.uk.makeTheCitySection.title }); %>
+      </h2>
+      <p class="mc-kharkiv__text">
+        <%- include('./localize-text-template', { enText: localizedContent.en.makeTheCitySection.description, ukText: localizedContent.uk.makeTheCitySection.description }); %>
+      </p>
     </div>
   </section>
   <!--  Kharkiv SECTION  -->
@@ -280,157 +205,85 @@
   <section>
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2 class="">What your donation can buy</h2>
+        <h2>
+          <%- include('./localize-text-template', { enText: localizedContent.en.donationPlansSection.title, ukText: localizedContent.uk.donationPlansSection.title }); %>
+        </h2>
       </div>
 
       <div class="row mc-donation-plans">
-        <div class="col-12 col-md-3">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">$20</span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Life saving first aid
-            </p>
-          </div>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-md-3">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">$50</span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Helmet
-            </p>
-          </div>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-md-3">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
+        <% for (const key of Object.keys(localizedContent.en.donationPlansSection.plans.list)) { %>
+          <% var planListItemEn = localizedContent.en.donationPlansSection.plans.list[key]; %>
+          <% var planListItemUk = localizedContent.uk.donationPlansSection.plans.list[key]; %>
+          <div class="col-12 col-sm-6 col-md-3 with-arrow">
+            <!--    HELP-ITEM      -->
+            <div class="mc-help">
               <span class="mc-help__size">
-                $100
+                <%- include('./localize-text-template', { enText: planListItemEn.priceText, ukText: planListItemUk.priceText }); %>
               </span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Body Armour
-            </p>
+              <p class="mc-help__desc">
+                <span class="mc-help__count">
+                  <%- include('./localize-text-template', { enText: planListItemEn.product.amount, ukText: planListItemUk.product.amount }); %>
+                </span>
+                <%- include('./localize-text-template', { enText: planListItemEn.product.text, ukText: planListItemUk.product.text }); %>
+              </p>
+            </div>
+            <!--    HELP-ITEM      -->
           </div>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-md-3">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-              <span class="mc-help__size">
-                $250
-              </span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Drone
-            </p>
-          </div>
-          <!--    HELP-ITEM      -->
-        </div>
+        <% } %>
       </div>
 
-      <div class="d-flex center">
-        <a href="#donate" class="mc-btn mc-donate-button">Donate now</a>
+      <div class="d-flex center mc-help__donate">
+        <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">
+          <%- include('./localize-text-template', { enText: localizedContent.en.cityCarousel.donateButton.text, ukText: localizedContent.uk.cityCarousel.donateButton.text }); %>
+        </a>
       </div>
     </div>
   </section>
   <!-- SECTION DONATION PLANS -->
 
-  <div class="mc-social-section">
-    <div class="container">
-      <div class="mc-social-wrapper">
-        <span>Share</span>
+  <% if (socialMedia.isRendered) { %>
+    <div class="mc-social-section">
+      <div class="container">
+        <div class="mc-social-wrapper">
+          <%- include('./localize-text-template', { enText: localizedContent.en.socialMedia.title, ukText: localizedContent.uk.socialMedia.title }); %>
 
-        <ul class="mc-socials">
-          <li class="mc-socials__item">
-            <a href="" target="_blank" class="mc-socials__link">
-              <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.125 13.944C12.751 13.363 13.581 13 14.5 13C16.43 13 18 14.57 18 16.5C18 18.43 16.43 20 14.5 20C12.57 20 11 18.43 11 16.5C11 16.214 11.044 15.939 11.109 15.673L5.875 13.056C5.249 13.637 4.419 14 3.5 14C1.57 14 0 12.43 0 10.5C0 8.57 1.57 7 3.5 7C4.399 7 5.212 7.351 5.832 7.91L11.126 4.381C11.052 4.098 11 3.806 11 3.5C11 1.57 12.57 0 14.5 0C16.43 0 18 1.57 18 3.5C18 5.43 16.43 7 14.5 7C13.601 7 12.788 6.649 12.168 6.09L6.874 9.619C6.948 9.902 7 10.194 7 10.5C7 10.786 6.956 11.061 6.891 11.327L12.125 13.944ZM14.5 2C15.327 2 16 2.673 16 3.5C16 4.327 15.327 5 14.5 5C13.673 5 13 4.327 13 3.5C13 2.673 13.673 2 14.5 2ZM2 10.5C2 11.327 2.673 12 3.5 12C4.327 12 5 11.327 5 10.5C5 9.673 4.327 9 3.5 9C2.673 9 2 9.673 2 10.5ZM13 16.5C13 17.327 13.673 18 14.5 18C15.327 18 16 17.327 16 16.5C16 15.673 15.327 15 14.5 15C13.673 15 13 15.673 13 16.5Z" fill="#1D1D20"/>
-              </svg>
-            </a>
-          </li>
-          <li class="mc-socials__item">
-            <a href="" target="_blank" class="mc-socials__link">
-              <svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M3 0H17C18.654 0 20 1.346 20 3V13C20 14.654 18.654 16 17 16H3C1.346 16 0 14.654 0 13V3C0 1.346 1.346 0 3 0ZM3 2H17C17.552 2 18 2.449 18 3V3.412L10 7.856L2 3.412V3C2 2.449 2.448 2 3 2ZM3 14C2.448 14 2 13.551 2 13V5.699L9.515 9.874C9.665 9.958 9.833 10 10 10C10.167 10 10.335 9.958 10.485 9.874L18 5.699V13C18 13.551 17.552 14 17 14H3Z" fill="#1D1D20"/>
-              </svg>
-            </a>
-          </li>
-          <li class="mc-socials__item">
-            <a href="" target="_blank" class="mc-socials__link">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g style="mix-blend-mode:multiply">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10 0C4.4775 0 0 4.14583 0 9.25917C0 12.1733 1.45417 14.7725 3.72667 16.4692V20L7.13167 18.1317C8.04 18.3825 9.00333 18.5183 10 18.5183C15.5225 18.5183 20 14.3733 20 9.25917C20 4.14583 15.5225 0 10 0ZM10.9942 12.4692L8.4475 9.75333L3.47833 12.4692L8.94417 6.66667L11.5525 9.3825L16.46 6.66667L10.9942 12.4692Z" fill="#0084FF"/>
-                </g>
-              </svg>
-            </a>
-          </li>
-          <li class="mc-socials__item">
-            <a href="" target="_blank" class="mc-socials__link">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g style="mix-blend-mode:multiply">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 20L1.41254 14.8642C0.540902 13.3608 0.0828937 11.6567 0.0837311 9.90917C0.086243 4.44583 4.55329 0 10.0419 0C12.7053 0.000833333 15.2056 1.03333 17.0862 2.90667C18.9659 4.78 20.0008 7.27 20 9.91833C19.9975 15.3825 15.5304 19.8283 10.0419 19.8283C8.37562 19.8275 6.73365 19.4117 5.27924 18.6217L0 20ZM5.52374 16.8275C6.92707 17.6567 8.26677 18.1533 10.0385 18.1542C14.6002 18.1542 18.3162 14.4592 18.3187 9.91667C18.3204 5.365 14.622 1.675 10.0452 1.67333C5.4802 1.67333 1.76673 5.36833 1.76505 9.91C1.76421 11.7642 2.31014 13.1525 3.22699 14.605L2.39052 17.645L5.52374 16.8275ZM15.0582 12.2742C14.9962 12.1708 14.8304 12.1092 14.5809 11.985C14.3322 11.8608 13.1089 11.2617 12.8803 11.1792C12.6526 11.0967 12.4868 11.055 12.3202 11.3033C12.1544 11.5508 11.6771 12.1092 11.5323 12.2742C11.3874 12.4392 11.2417 12.46 10.993 12.3358C10.7444 12.2117 9.94222 11.9508 8.99188 11.1067C8.25253 10.45 7.75266 9.63917 7.6078 9.39083C7.46295 9.14333 7.59273 9.00917 7.71665 8.88583C7.82885 8.775 7.96533 8.59667 8.09009 8.45167C8.21653 8.30833 8.25756 8.205 8.34129 8.03917C8.42418 7.87417 8.38315 7.72917 8.32035 7.605C8.25756 7.48167 7.76019 6.2625 7.55338 5.76667C7.35075 5.28417 7.14561 5.34917 6.99322 5.34167L6.51595 5.33333C6.35016 5.33333 6.08055 5.395 5.8528 5.64333C5.62505 5.89167 4.982 6.49 4.982 7.70917C4.982 8.92833 5.87373 10.1058 5.99765 10.2708C6.12241 10.4358 7.75182 12.9375 10.2478 14.01C10.8415 14.265 11.3054 14.4175 11.6662 14.5317C12.2624 14.72 12.805 14.6933 13.2337 14.63C13.7118 14.5592 14.7057 14.0308 14.9133 13.4525C15.121 12.8733 15.121 12.3775 15.0582 12.2742Z" fill="#25D366"/>
-                </g>
-              </svg>
-            </a>
-          </li>
-          <li class="mc-socials__item">
-            <a href="" target="_blank" class="mc-socials__link">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <mask id="mask0_30_36" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="21" height="20">
-                  <path d="M0.000419617 0H20.001V19.8795H0.000419617V0Z" fill="white"/>
-                </mask>
-                <g mask="url(#mask0_30_36)">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0008 9.99989C20.0008 4.47656 15.5232 -0.000976562 9.99988 -0.000976562C4.47655 -0.000976562 -0.000984192 4.47656 -0.000984192 9.99989C-0.000984192 14.9916 3.65619 19.129 8.43725 19.8793V12.8908H5.89797V9.99989H8.43725V7.79658C8.43725 5.29011 9.93031 3.90561 12.2147 3.90561C13.3089 3.90561 14.4534 4.10094 14.4534 4.10094V6.56209H13.1923C11.95 6.56209 11.5625 7.333 11.5625 8.12389V9.99989H14.3362L13.8928 12.8908H11.5625V19.8793C16.3436 19.129 20.0008 14.9916 20.0008 9.99989Z" fill="#1877F2"/>
-                </g>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.893 12.8909L14.3364 10H11.5628V8.12404C11.5628 7.33315 11.9502 6.56224 13.1926 6.56224H14.4536V4.10109C14.4536 4.10109 13.3091 3.90576 12.215 3.90576C9.93055 3.90576 8.43749 5.29026 8.43749 7.79672V10H5.89821V12.8909H8.43749V19.8794C8.94666 19.9593 9.46852 20.0009 10.0001 20.0009C10.5317 20.0009 11.0536 19.9593 11.5628 19.8794V12.8909H13.893Z" fill="white"/>
-              </svg>
-            </a>
-          </li>
-          <li class="mc-socials__item">
-            <a href="" target="_blank" class="mc-socials__link">
-              <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g style="mix-blend-mode:multiply">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M20 2.51256C19.2642 2.85423 18.4733 3.08434 17.6433 3.18806C18.4908 2.65725 19.1417 1.81614 19.4475 0.813782C18.655 1.30537 17.7767 1.66274 16.8417 1.85536C16.0942 1.02123 15.0267 0.5 13.8467 0.5C11.1975 0.5 9.25083 3.08521 9.84917 5.76892C6.44 5.59024 3.41667 3.88187 1.3925 1.28533C0.3175 3.21421 0.835 5.73754 2.66167 7.01533C1.99 6.99267 1.35667 6.80004 0.804167 6.47841C0.759167 8.46657 2.12167 10.3266 4.095 10.7406C3.5175 10.9045 2.885 10.9428 2.24167 10.8138C2.76333 12.5187 4.27833 13.759 6.075 13.7939C4.35 15.2085 2.17667 15.8404 0 15.572C1.81583 16.7896 3.97333 17.5 6.29 17.5C13.9083 17.5 18.2125 10.7703 17.9525 4.73431C18.7542 4.12854 19.45 3.37285 20 2.51256Z" fill="#1DA1F2"/>
-                </g>
-              </svg>
-            </a>
-          </li>
-          <li class="mc-socials__item">
-            <a href="" target="_blank" class="mc-socials__link">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g style="mix-blend-mode:multiply">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4.15 2.56522C4.15 3.70604 3.225 4.63043 2.08333 4.63043C0.941667 4.63043 0.0166667 3.70604 0.0166667 2.56522C0.0166667 1.42522 0.941667 0.5 2.08333 0.5C3.225 0.5 4.15 1.42522 4.15 2.56522ZM4.16667 6.28261H0V19.5H4.16667V6.28261ZM10.8183 6.28261H6.67833V19.5H10.8192V12.5617C10.8192 8.70387 15.8433 8.3883 15.8433 12.5617V19.5H20V11.1309C20 4.62135 12.565 4.85843 10.8183 8.06283V6.28261Z" fill="#0077B5"/>
-                </g>
-              </svg>
-            </a>
-          </li>
-        </ul>
+          <ul class="mc-socials">
+            <% socialMedia.items.forEach(function(item) { %>
+            <li class="mc-socials__item">
+              <a href="<%= item.href %>" target="_blank" class="mc-socials__link">
+                <img src="images/socialIcons/<%= item.icon %>" alt="<%= item.alt %>">
+              </a>
+            </li>
+            <%}); %>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  <% } %>
 </main>
 
 <!--   FOOTER   -->
 <footer class="mc-footer">
   <div class="container">
-    <div class="mc-footer-wrapper {">
-      <div class="mc-footer-item">
-        <img src="images/Logo-gray-makeacity.svg" alt="зроби місто">
-      </div>
-      <div class="mc-footer-item">
-        <img src="images/Logo-Kharkiv.svg" alt="Kharkiv">
-        <span>Let’s save heroic Kharkiv together!</span>
-      </div>
-      <div class="mc-footer-item">
-        <img src="images/Flag-UA.svg" alt="Ukraine flag">
-        <span>Slava Ukraini</span>
-      </div>
+    <div class="mc-footer-wrapper">
+      <% for (const key of Object.keys(localizedContent.en.footer.logos.list)) { %>
+      <% var logoItemEn = localizedContent.en.footer.logos.list[key]; %>
+      <% var logoItemUk = localizedContent.uk.footer.logos.list[key]; %>
+        <div class="mc-footer-item">
+          <% if (logoItemEn.href && logoItemUk.href) { %>
+          <a href="<%- logoItemEn.href %>" target="_blank">
+          <% } %>
+          <% if (logoItemEn.image.src) { %>
+            <img src="images/<%- logoItemEn.image.src %>" alt="<%- logoItemEn.image.alt %>">
+          <% } %>
+          <% if (logoItemEn.text && logoItemUk.text) { %>
+            <%- include('./localize-text-template', { enText: logoItemEn.text, ukText: logoItemUk.text }); %>
+          <% } %>
+          <% if (logoItemEn.href && logoItemUk.href) { %>
+          </a>
+          <% } %>
+        </div>
+      <% }; %>
     </div>
   </div>
 </footer>

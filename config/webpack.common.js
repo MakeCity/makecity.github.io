@@ -1,8 +1,10 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ejs = require('ejs')
 
 const paths = require('./paths')
+const data = require('../data/index')
 
 module.exports = {
   // Where webpack looks to start building the bundle
@@ -37,9 +39,9 @@ module.exports = {
     // Generates an HTML file from a template
     // Generates deprecation warning: https://github.com/jantimon/html-webpack-plugin/issues/1501
     new HtmlWebpackPlugin({
+      filename: 'index.html', // output file
       favicon: paths.src + '/images/favicon.ico',
       template: paths.src + '/template.html', // template file
-      filename: 'index.html', // output file
     }),
   ],
 
@@ -49,6 +51,18 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: "html-loader",
+        options: {
+          preprocessor: async (content, loaderContext) => {
+            let result;
+            try {
+              result = ejs.render(content, data, {views: [paths.src]});
+            } catch (error) {
+              await loaderContext.emitError(error);
+              return content;
+            }
+            return result;
+          },
+        },
       },
 
       // JavaScript: Use Babel to transpile JavaScript files

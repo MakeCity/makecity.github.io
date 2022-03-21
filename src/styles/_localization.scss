@@ -1,0 +1,11 @@
+html[lang='en'] {
+  [data-display-lang='uk'] {
+    display: none;
+  }
+}
+
+html[lang='uk'] {
+  [data-display-lang='en'] {
+    display: none;
+  }
+}

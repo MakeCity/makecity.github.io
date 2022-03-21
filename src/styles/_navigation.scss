@@ -48,6 +48,15 @@
     color: #B0B0B0;
   }
 
+  &__link {
+    &--current, &--current:focus {
+      color: currentColor;
+      cursor: not-allowed;
+      text-decoration: none;
+      pointer-events: none;
+    }
+  }
+
   &__item + &__item{
     margin-left: .5em;
   }
