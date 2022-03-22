@@ -1,8 +1,29 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Mustache = require('mustache');
 
-const paths = require('./paths')
+
+const paths = require('../paths')
+const readContent = require('../readContent')
+
+const content = readContent();
+
+console.log(JSON.stringify(content.languages, null, 2));
+
+const createPluginsConfig = (content) => {
+  return content.languages.items.map((language) => {
+    const isDefaultLanguage = language.code === content.languages.defaultLanguageCode;
+
+    return new HtmlWebpackPlugin({
+      favicon: paths.src + '/images/favicon.ico',
+      template: paths.src + '/template.html', // template file
+      filename: `${isDefaultLanguage ? 'index' : language.code}.html`, // output file
+    });
+  });
+};
+
+const htmlFilesPlugins = createPluginsConfig(content);
 
 module.exports = {
   // Where webpack looks to start building the bundle
@@ -34,13 +55,7 @@ module.exports = {
       ],
     }),
 
-    // Generates an HTML file from a template
-    // Generates deprecation warning: https://github.com/jantimon/html-webpack-plugin/issues/1501
-    new HtmlWebpackPlugin({
-      favicon: paths.src + '/images/favicon.ico',
-      template: paths.src + '/template.html', // template file
-      filename: 'index.html', // output file
-    }),
+    ...htmlFilesPlugins,
   ],
 
   // Determine how modules within the project are treated
@@ -49,6 +64,19 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: "html-loader",
+        options: {
+          preprocessor: async (template, loaderContext) => {
+            let result;
+            try {
+              // @TODO: pass current language into template for interpolation
+              result = Mustache.render(template, content);
+            } catch (error) {
+              await loaderContext.emitError(error);
+              return process.exit(1);
+            }
+            return result;
+          },
+        },
       },
 
       // JavaScript: Use Babel to transpile JavaScript files
