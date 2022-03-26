@@ -45,7 +45,7 @@
   <!--  HERO SECTION  -->
   <section class="mc-hero">
     <!--    SLIDER     -->
-    <div class="mc-slider glide">
+    <div class="mc-slider mc-hero-slider glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
           <li class="glide__slide mc-slide">
@@ -153,6 +153,10 @@
             </div>
           </li>
         </ul>
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--prev" aria-label="prev slide" data-glide-dir="<"></button>
+          <button class="glide__arrow glide__arrow--next" aria-label="next slide" data-glide-dir=">"></button>
+        </div>
       </div>
     </div>
     <!--    SLIDER     -->
@@ -247,6 +251,35 @@
   </section>
   <!--  ABOUT SECTION  -->
 
+  <section class="mc-help-report-section">
+    <div class="container">
+      <div class="mc-head-wrapper">
+        <h2>Here’s how it looks like</h2>
+      </div>
+      <div class="mc-help-report-wrapper">
+      <!--   SLIDER   -->
+        <div class="mc-slider mc-help-report-slider glide">
+          <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+              <li class="glide__slide mc-slide mc-help-report-slider__item">
+                <img src="images/content/help-item.jpg" alt="help" class="mc-slide__img">
+              </li>
+              <li class="glide__slide mc-slide mc-help-report-slider__item">
+                <img src="images/content/mirror_stream.jpg" alt="Kharkiv photo" class="mc-slide__img">
+              </li>
+            </ul>
+            <div class="glide__arrows" data-glide-el="controls">
+              <button class="glide__arrow glide__arrow--prev" aria-label="prev slide" data-glide-dir="<"></button>
+              <button class="glide__arrow glide__arrow--next" aria-label="next slide" data-glide-dir=">"></button>
+            </div>
+          </div>
+        </div>
+        <!--   SLIDER   -->
+        <a href="#donate" class="mc-btn mc-donate-button">Donate now</a>
+      </div>
+    </div>
+  </section>
+
   <!--  DONATE SECTION  -->
   <section id="donate" class="mc-donate">
     <div class="container">
@@ -264,27 +297,27 @@
 
             <dl>
               <dt>IBAN</dt>
-              <dd>
+              <dd >
                 UA 00 000000 00000 0000 0000 0000 00
-                <button class="mc-copy-btn" data-copy="UA 00 000000 00000 0000 0000 0000 00" title="copy"></button>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="UA 00 000000 00000 0000 0000 0000 00" title="copy"></button>
               </dd>
 
               <dt>Account No</dt>
               <dd>
                 00000000000000
-                <button class="mc-copy-btn" data-copy="00000000000000" title="copy"></button>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="00000000000000" title="copy"></button>
               </dd>
 
               <dt>Receiver</dt>
               <dd>
                 John Doe, <address> 61000, Ukraine, reg. Kharkivska, c. Kharkiv, str. Whatever, build. 00, fl. 00</address>
-                <button class="mc-copy-btn" data-copy="John Doe, 61000, Ukraine, reg. Kharkivska, c. Kharkiv, str. Whatever, build. 00, fl. 00" title="copy"></button>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="John Doe, 61000, Ukraine, reg. Kharkivska, c. Kharkiv, str. Whatever, build. 00, fl. 00" title="copy"></button>
               </dd>
 
               <dt>Receiver</dt>
               <dd>
                 00000000000000
-                <button class="mc-copy-btn" data-copy="00000000000000" title="copy"></button>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="00000000000000" title="copy"></button>
               </dd>
             </dl>
 
@@ -294,19 +327,19 @@
               <dt>Bank</dt>
               <dd>
                 JSC UNIVERSAL BANK
-                <button class="mc-copy-btn" data-copy="JSC UNIVERSAL BANK" title="copy"></button>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="JSC UNIVERSAL BANK" title="copy"></button>
               </dd>
 
               <dt>City</dt>
               <dd>
                 <address>KYIV, UKRAINE</address>
-                <button class="mc-copy-btn" data-copy="KYIV, UKRAINE" title="copy"></button>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="KYIV, UKRAINE" title="copy"></button>
               </dd>
 
               <dt>Swift code</dt>
               <dd>
                 SWIFTCODE
-                <button class="mc-copy-btn" data-copy="SWIFTCODE" title="copy"></button>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="SWIFTCODE" title="copy"></button>
               </dd>
             </dl>
 
@@ -507,6 +540,12 @@
       <div class="mc-footer-item">
         <img src="images/Logo-Kharkiv.svg" alt="Kharkiv">
         <span>Let’s save heroic Kharkiv together!</span>
+      </div>
+      <div class="mc-footer-item">
+      <!-- Todo add link -->
+        <a href="#">
+          <img src="images/content/newLife.png" alt="newLife">
+        </a>
       </div>
       <div class="mc-footer-item">
         <img src="images/Flag-UA.svg" alt="Ukraine flag">
