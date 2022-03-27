@@ -3,7 +3,7 @@ import Glide  from '@glidejs/glide';
 // Todo move to general settings repeatable options
 const HERO_CAROUSEL_OPTIONS = {
   type: 'carousel',
-  // autoplay: 3000,
+  autoplay: 3000,
   animationDuration: 1000,
   animationTimingFunc: 'ease-out',
   startAt: 1,
@@ -32,7 +32,7 @@ const HERO_CAROUSEL_OPTIONS = {
 };
 const HELP_REPORT_CAROUSEL_OPTIONS = {
   type: 'carousel',
-  // autoplay: 3000,
+  autoplay: 3000,
   animationDuration: 1000,
   animationTimingFunc: 'ease-out',
   startAt: 1,
