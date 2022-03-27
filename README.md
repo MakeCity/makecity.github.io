@@ -1,6 +1,6 @@
 ## Installation
 
-Clone this repo and npm install .
+Clone this repo and npm install.
 
 ```bash
 npm i
