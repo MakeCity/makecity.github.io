@@ -34,6 +34,7 @@ class HtmlWebpackProcessingPlugin {
                 );
                 typeof callback === "function" && callback(null, htmlPluginData);
             } catch (err) {
+                console.log(err);
                 typeof callback === "function" && callback(err);
             }
         } else {

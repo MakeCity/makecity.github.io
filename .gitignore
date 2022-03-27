@@ -48,6 +48,9 @@ bower_components/
 # dynamically loaded content file
 content.json
 
+# build artifacts
+docs
+
 # secrets local config file
 config/secrets.js
 

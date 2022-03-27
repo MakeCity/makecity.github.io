@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ejs = require('ejs');
 const HtmlWebpackProcessingPlugin = require('./HtmlWebpackProcessingPlugin');
+const appConfig = require('../../config');
 
 const paths = require('../paths')
 const readContent = require('../readContent')
@@ -19,13 +20,15 @@ const createPluginsConfig = (content) => {
       template: paths.src + '/template.html', // template file
       filename: `${isDefaultLanguage ? 'index' : currentLang}.html`, // output file
       preProcessing: (originalHTML) => {
-        return ejs.render(originalHTML, {
+        const html = ejs.render(originalHTML, {
+          appConfig,
           content: content.content[currentLang],
           languages: {
             ...content.languages,
             current: currentLang,
           },
         });
+        return html;
       },
     });
   });

@@ -19,14 +19,17 @@ const client = contentful.createClient({
 });
 
 const saveContent = (jsonContent) => {
-    let data = JSON.stringify(jsonContent);
+    let data = JSON.stringify(jsonContent, null, 2);
     fs.writeFileSync(paths.contentFile, data);
 };
 
 const loadEntries = async (client, languages) => {
     let entries = {};
     for (const language of languages.items) {
-        entries[language.code] = await client.getEntries({ locale: language.code });
+        entries[language.code] = await client.getEntries({
+            locale: language.code,
+            include: 10,
+        });
     }
     return entries;
 };

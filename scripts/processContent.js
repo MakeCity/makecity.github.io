@@ -1,28 +1,9 @@
 const richHtmlRenderer = require('@contentful/rich-text-html-renderer');
 
-const reachContentFieldsDescriptors = [{
-    id: 'localizedTextSample',
-    name: 'description'
-}];
-
-const getRichTextFieldDescriptor = (entry) => {
-    return reachContentFieldsDescriptors.find(({ id, name }) => {
-        return id === entry.sys.contentType.sys.id
-            && !!entry.fields
-            && !!entry.fields[name];
-    });
-};
-
 const renderReachTextFields = (languages, jsonContent) => {
     languages.items.forEach(({ code }) => {
-        jsonContent[code].entries.items = jsonContent[code].entries.items.map((entry) => {
-            const richTextFieldDescriptor = getRichTextFieldDescriptor(entry);
-            if (richTextFieldDescriptor) {
-                const rawRichTextField = entry.fields[richTextFieldDescriptor.name];
-                entry.fields[richTextFieldDescriptor.name] = richHtmlRenderer.documentToHtmlString(rawRichTextField);
-            }
-            return entry;
-        });
+        const { paymentDetailsSection } = jsonContent[code].sections.donate.fields;
+        paymentDetailsSection.fields.richText = richHtmlRenderer.documentToHtmlString(paymentDetailsSection.fields.richText);
     });
     return jsonContent;
 };
@@ -34,8 +15,8 @@ const createTemplateDataModel = (languages, jsonContent) => {
             head: {
                 title: localeContent.entries.items.find(entry => entry.sys.contentType.sys.id === 'siteTitle'),
                 meta: localeContent.entries.items.filter(entry => entry.sys.contentType.sys.id === 'siteMeta'),
-                links: localeContent.entries.items.filter(entry => entry.sys.contentType.sys.id === 'siteLinks'),
             },
+            sections: localeContent.entries.items.find(entry => entry.sys.contentType.sys.id === 'sections').fields,
         };
         return acc;
     }, {});
@@ -48,10 +29,11 @@ const processContent = (languages, jsonContent) => {
         default: defaultLanguage.code,
         items: languages.items,
     };
-    const stringifiedContent = renderReachTextFields(languages, jsonContent);
+    const templateDataModel = createTemplateDataModel(languages, jsonContent);
+    const stringifiedContent = renderReachTextFields(languages, templateDataModel);
     return {
         languages: languagesSection,
-        content: createTemplateDataModel(languages, stringifiedContent),
+        content: stringifiedContent,
     };
 };
 

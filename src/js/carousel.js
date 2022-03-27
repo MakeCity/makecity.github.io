@@ -60,14 +60,10 @@ const HELP_REPORT_CAROUSEL_OPTIONS = {
   },
 };
 
-
-function initHeroCarousel() {
+export function initHeroCarousel() {
   new Glide('.mc-hero-slider', HERO_CAROUSEL_OPTIONS).mount()
 }
 
-function initHelpReportCarousel() {
+export function initHelpReportCarousel() {
   new Glide('.mc-help-report-slider', HELP_REPORT_CAROUSEL_OPTIONS).mount()
 }
-
-window.addEventListener('DOMContentLoaded', initHeroCarousel)
-window.addEventListener('DOMContentLoaded', initHelpReportCarousel)

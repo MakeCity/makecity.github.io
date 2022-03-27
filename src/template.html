@@ -2,20 +2,21 @@
 <html lang="<%= languages.current %>">
 <head>
   <title><%= content.head.title.fields.text %></title>
-  <meta name="description" content="Do you want to help the city of Kharkiv and its inhabitants? Make your donation for the benefit of citizens and the Armed Forces!">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="description" content="">
-  <meta name="robots" content="noindex,nofollow">
+  <% content.head.meta.forEach(function(tag) { %>
+    <meta name="<%- tag.fields.name %>" content="<%- tag.fields.content %>">
+  <% }); %>
 
+  <link rel="canonical" href="<%= appConfig.siteUrl %>" />
+  <% languages.items.forEach(function(language) { %>
+    <link rel="alternate" hreflang="<%= language.code %>" href="<%= language.code === languages.default ? appConfig.siteUrl : `${appConfig.siteUrl}/${language.code}` %>"/>
+  <% }); %>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap"></noscript>
-  <script>
-    console.log(<%- JSON.stringify({content, languages}) %>);
-  </script>
 </head>
 <body>
 
@@ -23,19 +24,24 @@
 <header class="mc-header">
   <div class="container">
     <div class="mc-header-wrapper">
-      <a href="/" class="mc-logo">
-        <img src="images/Logo-makeacity.svg" alt="зроби місто">
+      <a href="<%= languages.current === languages.default ? '/' : `/${languages.current}` %>" class="mc-logo">
+        <img src="https:<%- content.sections.logo.fields.file.url %>" alt="<%= content.sections.logo.fields.title %>">
       </a>
 
       <!--  LANG LIST    -->
       <nav class="mc-lang">
         <ul class="mc-lang__list">
-          <li class="mc-lang__item">
-            <span class="mc-lang__link mc-lang__link--current">English</span>
-          </li>
-          <li class="mc-lang__item">
-            <a href="/uk" class="mc-lang__link">Українська</a>
-          </li>
+          <% languages.items.forEach(function(language) { %>
+            <% if (languages.current === language.code) { %>
+              <li class="mc-lang__item">
+                <span class="mc-lang__link mc-lang__link--current"><%= language.name %></span>
+              </li>
+            <% } else { %>
+              <li class="mc-lang__item">
+                <a href="<%= language.code === languages.default ? '/' : `/${language.code}` %>" class="mc-lang__link"><%= language.name %></a>
+              </li>
+            <% } %>
+          <% }); %>
         </ul>
       </nav>
       <!--  LANG LIST    -->
@@ -47,114 +53,20 @@
 <main>
   <!--  HERO SECTION  -->
   <section class="mc-hero">
+    <div class="mc-hero__content">
+      <h1 class="mc-hero__title"><%= content.sections.cityCarousel.fields.title %></h1>
+      <p class="mc-hero__text"><%= content.sections.cityCarousel.fields.description %></p>
+      <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
+    </div>
     <!--    SLIDER     -->
     <div class="mc-slider mc-hero-slider glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
+          <% content.sections.cityCarousel.fields.images.forEach(function(image) { %>
           <li class="glide__slide mc-slide">
-            <img src="images/content/mirror_stream.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
+            <img src="https:<%- image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= image.fields.title %>" class="mc-slide__img">
           </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Opera_and_Ballet_Theater_Kharkiv.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_1.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_2.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_3.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_4.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_5.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_6.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_7.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_8.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_9.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_10.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
-          <li class="glide__slide mc-slide">
-            <img src="images/content/Hero_11.jpg" alt="Kharkiv photo" class="mc-slide__img">
-            <div class="mc-hero__content">
-              <h1 class="mc-hero__title">Help us save the city and its people.</h1>
-              <p class="mc-hero__text">Make the city is an NGO that focus in human relief for the city of Kharkiv. </p>
-              <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button">Donate now</a>
-            </div>
-          </li>
+          <% }); %>
         </ul>
         <div class="glide__arrows" data-glide-el="controls">
           <button class="glide__arrow glide__arrow--prev" aria-label="prev slide" data-glide-dir="<"></button>
@@ -163,7 +75,7 @@
       </div>
     </div>
     <!--    SLIDER     -->
-    <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button mc-donate-button--mobile">Donate now</a>
+    <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button mc-donate-button--mobile"><%= content.sections.donateBtnTitle %></a>
   </section>
   <!--  HERO SECTION  -->
 
@@ -171,84 +83,26 @@
   <section class="mc-help-section">
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2 class="">How we’ve already helped</h2>
+        <h2 class=""><%= content.sections.alreadyHelped.fields.title %></h2>
       </div>
 
       <div class="row">
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">50</span>
-            <p class="mc-help__desc">body armours + <br>helmets</p>
+        <% content.sections.alreadyHelped.fields.list.forEach(function(aidListItem) { %>
+          <div class="col-12 col-sm-6 col-md-3 with-arrow">
+            <!--    HELP-ITEM      -->
+            <div class="mc-help">
+              <span class="mc-help__size">
+                <%= aidListItem.fields.amount %>
+                <% if (aidListItem.fields.remark) { %>
+                <sup><%= aidListItem.fields.remark %></sup>
+                <% } %>
+              </span>
+              <p class="mc-help__desc"><%= aidListItem.fields.title %></p>
+            </div>
+            <img src="./images/graphic-arrow.svg" alt="graphic arrow">
+            <!--    HELP-ITEM      -->
           </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">20</span>
-            <p class="mc-help__desc">drones</p>
-          </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">
-              50
-              <sup>ton</sup>
-            </span>
-            <p class="mc-help__desc">of humanitarian aid</p>
-          </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-sm-6 col-md-3 with-arrow">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">
-              2
-              <sup>ton</sup>
-            </span>
-            <p class="mc-help__desc">of medicine</p>
-          </div>
-          <svg width="776" height="869" viewBox="0 0 776 869" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M719.924 339.237L156.377 14.1263C86.8334 -26.0076 0 24.1524 0 104.42V754.582C0 834.85 86.9219 885.01 156.377 844.876L719.924 519.766C789.378 479.632 789.378 379.371 719.924 339.237Z" fill="url(#paint0_linear_2_1841)" fill-opacity="0.2"/>
-            <defs>
-              <linearGradient id="paint0_linear_2_1841" x1="0" y1="429.501" x2="772" y2="429.501" gradientUnits="userSpaceOnUse">
-                <stop stop-color="white" stop-opacity="0"/>
-                <stop offset="1" stop-color="#5696F8"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <!--    HELP-ITEM      -->
-        </div>
+        <%}); %>
       </div>
     </div>
   </section>
@@ -257,19 +111,18 @@
   <section class="mc-help-report-section">
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2>Here’s how it looks like</h2>
+        <h2><%= content.sections.alreadyHelped.fields.carousel.fields.title %></h2>
       </div>
       <div class="mc-help-report-wrapper">
       <!--   SLIDER   -->
         <div class="mc-slider mc-help-report-slider glide">
           <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
-              <li class="glide__slide mc-slide mc-help-report-slider__item">
-                <img src="images/content/help-item.jpg" alt="help" class="mc-slide__img">
-              </li>
-              <li class="glide__slide mc-slide mc-help-report-slider__item">
-                <img src="images/content/mirror_stream.jpg" alt="Kharkiv photo" class="mc-slide__img">
-              </li>
+              <% content.sections.alreadyHelped.fields.carousel.fields.images.forEach(function(image) { %>
+                <li class="glide__slide mc-slide mc-help-report-slider__item">
+                  <img src="https:<%- image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= image.fields.title %>" class="mc-slide__img">
+                </li>
+              <%}); %>
             </ul>
             <div class="glide__arrows" data-glide-el="controls">
               <button class="glide__arrow glide__arrow--prev" aria-label="prev slide" data-glide-dir="<"></button>
@@ -278,7 +131,7 @@
           </div>
         </div>
         <!--   SLIDER   -->
-        <a href="#donate" class="mc-btn mc-donate-button">Donate now</a>
+        <a href="#donate" class="mc-btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
       </div>
     </div>
   </section>
@@ -287,8 +140,8 @@
   <section id="donate" class="mc-donate">
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2>How to donate</h2>
-        <p>If you want to help please send your donations to card details:</p>
+        <h2><%= content.sections.donate.fields.title %></h2>
+        <p><%= content.sections.donate.fields.description %></p>
       </div>
 
       <div class="row">
@@ -296,54 +149,28 @@
           <div class="mc-donate-info">
             <img src="images/card.svg" alt="card icon">
 
-            <h3>Beneficiary</h3>
+            <h3><%= content.sections.donate.fields.beneficiarySection.fields.title %></h3>
 
             <dl>
-              <dt>IBAN</dt>
-              <dd >
-                UA 00 000000 00000 0000 0000 0000 00
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="UA 00 000000 00000 0000 0000 0000 00" title="copy"></button>
-              </dd>
-
-              <dt>Account No</dt>
-              <dd>
-                00000000000000
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="00000000000000" title="copy"></button>
-              </dd>
-
-              <dt>Receiver</dt>
-              <dd>
-                John Doe, <address> 61000, Ukraine, reg. Kharkivska, c. Kharkiv, str. Whatever, build. 00, fl. 00</address>
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="John Doe, 61000, Ukraine, reg. Kharkivska, c. Kharkiv, str. Whatever, build. 00, fl. 00" title="copy"></button>
-              </dd>
-
-              <dt>Receiver</dt>
-              <dd>
-                00000000000000
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="00000000000000" title="copy"></button>
-              </dd>
+              <% content.sections.donate.fields.beneficiarySection.fields.beneficiaryList.forEach(function(paymentDetailItem) { %>
+                <dt><%= paymentDetailItem.fields.label %></dt>
+                <dd >
+                  <%= paymentDetailItem.fields.value %>
+                  <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
+                </dd>
+              <%}); %>
             </dl>
 
-            <h4>Account with Institution</h4>
+            <h3><%= content.sections.donate.fields.beneficiarySection.fields.accountTitle %></h3>
 
             <dl>
-              <dt>Bank</dt>
-              <dd>
-                JSC UNIVERSAL BANK
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="JSC UNIVERSAL BANK" title="copy"></button>
+              <% content.sections.donate.fields.beneficiarySection.fields.accountList.forEach(function(paymentDetailItem) { %>
+              <dt><%= paymentDetailItem.fields.label %></dt>
+              <dd >
+                <%= paymentDetailItem.fields.value %>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
               </dd>
-
-              <dt>City</dt>
-              <dd>
-                <address>KYIV, UKRAINE</address>
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="KYIV, UKRAINE" title="copy"></button>
-              </dd>
-
-              <dt>Swift code</dt>
-              <dd>
-                SWIFTCODE
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="SWIFTCODE" title="copy"></button>
-              </dd>
+              <%}); %>
             </dl>
 
             <div class="d-flex mc-donate-info__bank-description">
@@ -358,25 +185,9 @@
             <img src="images/Info.svg" alt="info icon">
 
             <h3>Details of payment</h3>
-            <p>
-              ⚠️<br>
-              It’s very important to specify the purpose of the payment correctly. Choose the option you want depending on who sent you the payment
-              if the sender is an individual:
-            </p>
+            <h3><%= content.sections.donate.fields.paymentDetailsSection.fields.title %></h3>
 
-            <ul>
-              <li>👉 private transfer</li>
-              <li>👉 transfer to own account</li>
-              <li>👉 help to relative</li>
-            </ul>
-
-            <p>if the sender is a legal entity:</p>
-
-            <ul>
-              <li>👉 honorarium</li>
-              <li>👉 compensation for ...</li>
-            </ul>
-
+            <%- content.sections.donate.fields.paymentDetailsSection.fields.richText %>
           </div>
         </div>
       </div>
@@ -387,8 +198,8 @@
   <!--  Kharkiv SECTION  -->
   <section class="mc-kharkiv d-flex center middle">
     <div class="mc-kharkiv-head">
-      <h2 class="mc-kharkiv__title">Make the city, make Kharkiv</h2>
-      <p class="mc-kharkiv__text">Let’s save heroic Kharkiv together!</p>
+      <h2 class="mc-kharkiv__title"><%= content.sections.promo.fields.title %></h2>
+      <p class="mc-kharkiv__text"><%= content.sections.promo.fields.description %></p>
     </div>
   </section>
   <!--  Kharkiv SECTION  -->
@@ -397,68 +208,34 @@
   <section>
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2 class="">What your donation can buy</h2>
+        <h2 class=""><%= content.sections.plans.fields.title %></h2>
       </div>
 
       <div class="row mc-donation-plans">
-        <div class="col-12 col-md-3">
+        <% content.sections.plans.fields.list.forEach(function(paymentDetailItem) { %>
           <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">$20</span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Life saving first aid
-            </p>
+          <div class="col-12 col-md-3">
+            <div class="mc-help">
+              <span class="mc-help__size"><%= paymentDetailItem.fields.price %></span>
+              <p class="mc-help__desc">
+                <span class="mc-help__count"><%= paymentDetailItem.fields.amount %></span>
+                <%= paymentDetailItem.fields.product %>
+              </p>
+            </div>
           </div>
           <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-md-3">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-            <span class="mc-help__size">$50</span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Helmet
-            </p>
-          </div>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-md-3">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-              <span class="mc-help__size">
-                $100
-              </span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Body Armour
-            </p>
-          </div>
-          <!--    HELP-ITEM      -->
-        </div>
-        <div class="col-12 col-md-3">
-          <!--    HELP-ITEM      -->
-          <div class="mc-help">
-              <span class="mc-help__size">
-                $250
-              </span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count">1</span>
-              Drone
-            </p>
-          </div>
-          <!--    HELP-ITEM      -->
-        </div>
+        <%}); %>
       </div>
 
-      <div class="d-flex center">
-        <a href="#donate" class="mc-btn mc-donate-button">Donate now</a>
+      <div class="d-flex center mc-help__donate">
+        <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
       </div>
     </div>
   </section>
   <!-- SECTION DONATION PLANS -->
 
-  <div class="mc-social-section">
+  <% if (appConfig.isSocialSectionVisible) { %>
+    <div class="mc-social-section">
     <div class="container">
       <div class="mc-social-wrapper">
         <span>Share</span>
@@ -531,6 +308,7 @@
       </div>
     </div>
   </div>
+  <% } %>
 </main>
 
 <div>
@@ -540,24 +318,24 @@
 <!--   FOOTER   -->
 <footer class="mc-footer">
   <div class="container">
-    <div class="mc-footer-wrapper {">
-      <div class="mc-footer-item">
-        <img src="images/Logo-gray-makeacity.svg" alt="зроби місто">
-      </div>
-      <div class="mc-footer-item">
-        <img src="images/Logo-Kharkiv.svg" alt="Kharkiv">
-        <span>Let’s save heroic Kharkiv together!</span>
-      </div>
-      <div class="mc-footer-item">
-      <!-- Todo add link -->
-        <a href="#">
-          <img src="images/content/newLife.png" alt="newLife">
-        </a>
-      </div>
-      <div class="mc-footer-item">
-        <img src="images/Flag-UA.svg" alt="Ukraine flag">
-        <span>Slava Ukraini</span>
-      </div>
+    <div class="mc-footer-wrapper">
+      <% content.sections.footer.fields.logosList.forEach(function(logoListItem) { %>
+        <div class="mc-footer-item">
+          <% if (logoListItem.fields.href) { %>
+            <a href="<%= logoListItem.fields.href %>" target="_blank">
+              <img src="https:<%- logoListItem.fields.image.fields.file.url %>?q=80" alt="<%= logoListItem.fields.image.fields.title %>">
+              <% if (logoListItem.fields.title) { %>
+                <span><%= logoListItem.fields.title %></span>
+              <% } %>
+            </a>
+          <% } else { %>
+            <img src="https:<%- logoListItem.fields.image.fields.file.url %>?q=80" alt="<%= logoListItem.fields.image.fields.title %>">
+            <% if (logoListItem.fields.title) { %>
+            <span><%= logoListItem.fields.title %></span>
+            <% } %>
+          <% } %>
+        </div>
+      <% }); %>
     </div>
   </div>
 </footer>
