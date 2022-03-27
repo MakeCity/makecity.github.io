@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= languages.current %>">
 <head>
-  <title>Make the city: Help us save the city and its people</title>
+  <title><%= content.head.title.fields.text %></title>
   <meta name="description" content="Do you want to help the city of Kharkiv and its inhabitants? Make your donation for the benefit of citizens and the Armed Forces!">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap"></noscript>
+  <script>
+    console.log(<%- JSON.stringify({content, languages}) %>);
+  </script>
 </head>
 <body>
 
@@ -496,6 +499,10 @@
     </div>
   </div>
 </main>
+
+<div>
+
+</div>
 
 <!--   FOOTER   -->
 <footer class="mc-footer">

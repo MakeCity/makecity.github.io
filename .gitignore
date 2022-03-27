@@ -42,9 +42,13 @@ Desktop.ini
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules/
 
-
 # bower packages
 bower_components/
 
 # dynamically loaded content file
 content.json
+
+# secrets local config file
+config/secrets.js
+
+

@@ -1,24 +1,32 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const Mustache = require('mustache');
-
+const ejs = require('ejs');
+const HtmlWebpackProcessingPlugin = require('./HtmlWebpackProcessingPlugin');
 
 const paths = require('../paths')
 const readContent = require('../readContent')
 
 const content = readContent();
 
-console.log(JSON.stringify(content.languages, null, 2));
-
 const createPluginsConfig = (content) => {
   return content.languages.items.map((language) => {
-    const isDefaultLanguage = language.code === content.languages.defaultLanguageCode;
+    const currentLang = language.code;
+    const isDefaultLanguage = currentLang === content.languages.default;
 
     return new HtmlWebpackPlugin({
       favicon: paths.src + '/images/favicon.ico',
       template: paths.src + '/template.html', // template file
-      filename: `${isDefaultLanguage ? 'index' : language.code}.html`, // output file
+      filename: `${isDefaultLanguage ? 'index' : currentLang}.html`, // output file
+      preProcessing: (originalHTML) => {
+        return ejs.render(originalHTML, {
+          content: content.content[currentLang],
+          languages: {
+            ...content.languages,
+            current: currentLang,
+          },
+        });
+      },
     });
   });
 };
@@ -56,6 +64,7 @@ module.exports = {
     }),
 
     ...htmlFilesPlugins,
+    new HtmlWebpackProcessingPlugin(),
   ],
 
   // Determine how modules within the project are treated
@@ -64,19 +73,6 @@ module.exports = {
       {
         test: /\.html$/i,
         loader: "html-loader",
-        options: {
-          preprocessor: async (template, loaderContext) => {
-            let result;
-            try {
-              // @TODO: pass current language into template for interpolation
-              result = Mustache.render(template, content);
-            } catch (error) {
-              await loaderContext.emitError(error);
-              return process.exit(1);
-            }
-            return result;
-          },
-        },
       },
 
       // JavaScript: Use Babel to transpile JavaScript files

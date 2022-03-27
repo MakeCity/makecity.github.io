@@ -1,34 +1,42 @@
 const fs = require('fs');
 const contentful = require('contentful');
 const paths = require('./paths');
+const { processContent } = require('./processContent');
+const isProduction = process.env.NODE_ENV !== 'development';
 
-// @TODO: create dedicated account and secure variablles via Github secrets
-const SPACE_ID = 'lilgc54t56wx';
-const CONTENTFUL_ACCESS_TOKEN = 'bu44XBm_6pwRiN7oTREUS-R9WQwicwAVvqPaTHsTl38';
+let contentfulSpaceId = process.env.CONTENTFUL_SPACE_ID;
+let contentfulAccessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+
+if (!isProduction) {
+    const localSecrets = require('../config/secrets');
+    contentfulSpaceId = localSecrets.CONTENTFUL_SPACE_ID;
+    contentfulAccessToken = localSecrets.CONTENTFUL_ACCESS_TOKEN;
+}
 
 const client = contentful.createClient({
-    space: SPACE_ID,
-    accessToken: CONTENTFUL_ACCESS_TOKEN,
+    space: contentfulSpaceId,
+    accessToken: contentfulAccessToken,
 });
-
-const processContent = (languages, jsonContent) => {
-    delete jsonContent.nextSyncToken;
-
-    const defaultLanguage = languages.items.find((lang) => lang.default === true);
-
-    const languagesSection = {
-        defaultLanguageCode: defaultLanguage.code,
-        items: languages.items,
-    };
-    return {
-        languages: languagesSection,
-        content: jsonContent,
-    };
-};
 
 const saveContent = (jsonContent) => {
     let data = JSON.stringify(jsonContent);
     fs.writeFileSync(paths.contentFile, data);
+};
+
+const loadEntries = async (client, languages) => {
+    let entries = {};
+    for (const language of languages.items) {
+        entries[language.code] = await client.getEntries({ locale: language.code });
+    }
+    return entries;
+};
+
+const loadAssets = async (client, languages) => {
+    let assets = {};
+    for (const language of languages.items) {
+        assets[language.code] = await client.getAssets({ locale: language.code });
+    }
+    return assets;
 };
 
 const finishLog = (code) => {
@@ -44,13 +52,23 @@ const finishLog = (code) => {
 
     try {
         const languages = await client.getLocales();
-        const content  = await client.sync({ initial: true });
-
-        const processedContent = processContent(languages, content);
+        const loadedContent  = {
+            assets: await loadAssets(client, languages),
+            entries: await loadEntries(client, languages),
+        };
+        const localizedContent = languages.items.reduce((acc, { code }) => {
+            acc[code] = {
+                assets: loadedContent.assets[code],
+                entries: loadedContent.entries[code],
+            };
+            return acc;
+        }, {});
+        const processedContent = processContent(languages, localizedContent);
         saveContent(processedContent);
 
         finishLog(0);
     } catch (e) {
+        global.console.log(e);
         finishLog(1);
     }
 })();
