@@ -2,7 +2,7 @@ name: GitHub Pages
 
 on:
   repository_dispatch:
-    types: [contentful-publish-event]
+    types: [publish-event]
   push:
     branches:
       - master
