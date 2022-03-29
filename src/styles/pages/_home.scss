@@ -84,10 +84,16 @@ body {
   transform: translateY(-50%);
   width: 60%;
 
+  @media screen and (max-width: 64em) {
+    .mc-hero__title {
+      font-size: 3rem;
+    }
+  }
+
   @media screen and (max-width: 48em) {
     padding: 50px 39px 39px;
     top: 0;
-    bottom: 0;
+    bottom: 103px;
     left: 0;
     transform: none;
     text-align: center;
@@ -98,20 +104,16 @@ body {
 
     .mc-hero__title {
       font-size: 2rem;
+      margin-bottom: .5em;
     }
 
     .mc-hero__text {
       font-size: 1.25rem;
+      margin: .5rem 0;
     }
 
     .mc-donate-button {
       display: none;
-    }
-  }
-
-  @media screen and (max-width: 64em) {
-    .mc-hero__title {
-      font-size: 3rem;
     }
   }
 }
