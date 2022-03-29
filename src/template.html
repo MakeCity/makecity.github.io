@@ -56,7 +56,9 @@
     <div class="mc-hero__content">
       <h1 class="mc-hero__title"><%= content.sections.cityCarousel.fields.title %></h1>
       <p class="mc-hero__text"><%= content.sections.cityCarousel.fields.description %></p>
-      <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
+      <% if (appConfig.isDonateSectionVisible) { %>
+        <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
+      <% } %>
     </div>
     <!--    SLIDER     -->
     <div class="mc-slider mc-hero-slider glide">
@@ -75,7 +77,9 @@
       </div>
     </div>
     <!--    SLIDER     -->
-    <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button mc-donate-button--mobile"><%= content.sections.donateBtnTitle %></a>
+    <% if (appConfig.isDonateSectionVisible) { %>
+      <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button mc-donate-button--mobile"><%= content.sections.donateBtnTitle %></a>
+    <% } %>
   </section>
   <!--  HERO SECTION  -->
 
@@ -131,12 +135,15 @@
           </div>
         </div>
         <!--   SLIDER   -->
-        <a href="#donate" class="mc-btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
+        <% if (appConfig.isDonateSectionVisible) { %>
+          <a href="#donate" class="mc-btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
+        <% } %>
       </div>
     </div>
   </section>
 
   <!--  DONATE SECTION  -->
+  <% if (appConfig.isDonateSectionVisible) { %>
   <section id="donate" class="mc-donate">
     <div class="container">
       <div class="mc-head-wrapper">
@@ -153,11 +160,11 @@
 
             <dl>
               <% content.sections.donate.fields.beneficiarySection.fields.beneficiaryList.forEach(function(paymentDetailItem) { %>
-                <dt><%= paymentDetailItem.fields.label %></dt>
-                <dd >
-                  <%= paymentDetailItem.fields.value %>
-                  <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
-                </dd>
+              <dt><%= paymentDetailItem.fields.label %></dt>
+              <dd >
+                <%= paymentDetailItem.fields.value %>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
+              </dd>
               <%}); %>
             </dl>
 
@@ -192,6 +199,7 @@
       </div>
     </div>
   </section>
+  <% } %>
   <!--  DONATE SECTION  -->
 
   <!--  Kharkiv SECTION  -->
@@ -226,9 +234,11 @@
         <%}); %>
       </div>
 
+      <% if (appConfig.isDonateSectionVisible) { %>
       <div class="d-flex center mc-help__donate">
         <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
       </div>
+      <% } %>
     </div>
   </section>
   <!-- SECTION DONATION PLANS -->

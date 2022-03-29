@@ -34,6 +34,7 @@ const processContent = (languages, jsonContent) => {
     return {
         languages: languagesSection,
         content: stringifiedContent,
+        appConfig: jsonContent[languagesSection.default].entries.items.find(entry => entry.sys.contentType.sys.id === 'appConfig'),
     };
 };
 

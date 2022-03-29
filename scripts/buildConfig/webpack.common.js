@@ -3,7 +3,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ejs = require('ejs');
 const HtmlWebpackProcessingPlugin = require('./HtmlWebpackProcessingPlugin');
-const appConfig = require('../../config');
 
 const paths = require('../paths')
 const readContent = require('../readContent')
@@ -15,13 +14,15 @@ const createPluginsConfig = (content) => {
     const currentLang = language.code;
     const isDefaultLanguage = currentLang === content.languages.default;
 
+    // content.appConfig.fields.data.isDonateSectionVisible = true;
+
     return new HtmlWebpackPlugin({
       favicon: paths.src + '/images/favicon.ico',
       template: paths.src + '/template.html', // template file
       filename: `${isDefaultLanguage ? 'index' : currentLang}.html`, // output file
       preProcessing: (originalHTML) => {
         const html = ejs.render(originalHTML, {
-          appConfig,
+          appConfig: content.appConfig.fields.data,
           content: content.content[currentLang],
           languages: {
             ...content.languages,
