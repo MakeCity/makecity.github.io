@@ -36,7 +36,7 @@ cd docs && http-server
 ### Deploy
 1. Make production build.
 2. Commit `docs` folder.
-3. Push to `master` branch.
+3. Push to `master` branch. 
 
 ## Features
 
