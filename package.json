@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development npm run loadContent &&  webpack serve --config scripts/buildConfig/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production npm run loadContent && webpack --config scripts/buildConfig/webpack.prod.js --progress",
-    "build:dev": "cross-env NODE_ENV=development npm run loadContent && webpack --config scripts/buildConfig/webpack.prod.js --progress",
+    "build": "cross-env NODE_ENV=production npm run loadContent && webpack --config scripts/buildConfig/webpack.prod.js --progress && npm run createCNAME",
+    "build:dev": "cross-env NODE_ENV=development npm run loadContent && webpack --config scripts/buildConfig/webpack.prod.js --progress && npm run createCNAME",
     "loadContent": "node ./scripts/loadContent.js",
+    "createCNAME": "node ./scripts/createCNAME.js",
     "lint": "eslint 'src/**/*.js' || true",
     "prettify": "prettier --write 'src/**/*.js'"
   },
