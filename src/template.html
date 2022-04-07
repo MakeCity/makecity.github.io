@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap"></noscript>
+
 </head>
 <body>
 
@@ -55,6 +56,10 @@
   <section class="mc-hero">
     <div class="mc-hero__content">
       <h1 class="mc-hero__title"><%= content.sections.cityCarousel.fields.title %></h1>
+      <!--
+        content.sections.cityCarousel.fields.description
+        Можно в контентфуле увеличить размер поля чтобы был не 256, а больше
+      -->
       <p class="mc-hero__text"><%= content.sections.cityCarousel.fields.description %></p>
       <% if (appConfig.isDonateSectionVisible) { %>
         <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
@@ -83,7 +88,11 @@
   </section>
   <!--  HERO SECTION  -->
 
+
   <!--  ABOUT SECTION  -->
+  <!--
+     TODO: добавить к фото дату, чтобы было понятно когда это произошло, где-то на слайдере вверху справа + редактирование через контентфул
+  -->
   <section class="mc-help-section">
     <div class="container">
       <div class="mc-head-wrapper">
@@ -141,6 +150,64 @@
       </div>
     </div>
   </section>
+
+  <!-- Strengths SECTION -->
+  <!--
+    // TODO секция с перевагами
+    // следующие переваги
+    // логистический центр - иконка (иконки взять какие-то базовые из шрифта предлагаю)
+    // надеждая доставка - иконка
+    // Наличие складов  - тут вместо иконки цифра 10
+    // Работа с больницами
+    // Хабы в Харьков - 12
+    // Анализ потреб
+    // Сильная команда
+    // Отчетность
+  -->
+  <section>
+    <div class="container">
+      <div class="mc-head-wrapper">
+        <h2 class="">Our Strengths</h2>
+      </div>
+
+      <div class="row mc-donation-plans">
+        <% content.sections.plans.fields.list.forEach(function(paymentDetailItem) { %>
+        <!--    HELP-ITEM      -->
+        <div class="col-12 col-md-3">
+          <div class="mc-help">
+            <span class="mc-help__size">ик</span>
+            <p class="mc-help__desc">
+              <span class="mc-help__count">Логистический центр</span>
+            </p>
+          </div>
+        </div>
+        <!--    HELP-ITEM      -->
+        <%}); %>
+      </div>
+      <div class="row mc-donation-plans">
+        <% content.sections.plans.fields.list.forEach(function(paymentDetailItem) { %>
+        <!--    HELP-ITEM      -->
+        <div class="col-12 col-md-3">
+          <div class="mc-help">
+            <span class="mc-help__size"><%= paymentDetailItem.fields.price %></span>
+            <p class="mc-help__desc">
+              <span class="mc-help__count"><%= paymentDetailItem.fields.amount %></span>
+              <%= paymentDetailItem.fields.product %>
+            </p>
+          </div>
+        </div>
+        <!--    HELP-ITEM      -->
+        <%}); %>
+      </div>
+
+      <% if (appConfig.isDonateSectionVisible) { %>
+      <div class="d-flex center mc-help__donate">
+        <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
+      </div>
+      <% } %>
+    </div>
+  </section>
+  <!-- BENEFITS SECTION -->
 
   <!--  DONATE SECTION  -->
   <% if (appConfig.isDonateSectionVisible) { %>
@@ -211,6 +278,21 @@
   </section>
   <!--  Kharkiv SECTION  -->
 
+  <!-- SECTION Geography -->
+  <!--
+    // новая секция
+    // внизу описано предложение по карте
+  -->
+  <section>
+    <div class="container">
+      <div class="mc-head-wrapper">
+        <h2 class="">Stellar Ukraine Geography</h2>
+      </div>
+      <div id="map"></div>
+    </div>
+  </section>
+  <!-- SSECTION Geography -->
+
   <!-- SECTION DONATION PLANS -->
   <section>
     <div class="container">
@@ -242,6 +324,28 @@
     </div>
   </section>
   <!-- SECTION DONATION PLANS -->
+
+  <!-- Contact -->
+  <!--
+    // TODO:
+    контакты посередине
+    телефон
+    адрес
+    почта
+   -->
+  <section>
+    <div class="container">
+      <div class="mc-head-wrapper">
+        <h2 class="">COntacts</h2>
+      </div>
+
+      <div class="row mc-donation-plans">
+          Contacts
+      </div>
+
+    </div>
+  </section>
+  <!-- Contact -->
 
   <% if (appConfig.isSocialSectionVisible) { %>
     <div class="mc-social-section">
@@ -350,6 +454,66 @@
   </div>
 </footer>
 <!--   FOOTER   -->
+
+<script type="text/javascript">
+  function initMap() {
+    /*
+    * TODO Сделать страны и города разными цветами
+    *  Идея в том что мы сщ странами взаимодейтсвуем, а города обеспечиваем
+    *  Добавить название страны города
+    *  Будет круто добавить попапчик чтобы вставить туда немного деталей типа сколько мы туда доставили
+    * */
+
+    // The location of Uluru
+
+    const cities = {
+      kyiv: { coords: { lat: 50.4501, lng: 30.5234 } },
+      kharkiv: { coords: { lat: 49.9935, lng: 36.230383 } },
+      lviv: { coords: { lat: 49.839683, lng: 24.029717 } },
+      dnipro: { coords: { lat: 48.464717, lng: 35.046183 } },
+      poltava: { coords: { lat: 49.588267, lng: 34.551417 } },
+    };
+
+    const countries = {
+      poland: { coords: { lat: 51.919438, lng: 19.145136 } },
+      switzerland: { coords: { lat: 46.818188, lng: 8.227512 } },
+      netherlands: { coords: { lat: 52.132633, lng: 5.291266 } },
+      england: { coords: { lat: 52.355518, lng: -1.17432 } },
+      italy: { coords: { lat: 41.87194, lng: 12.56738 } },
+    };
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4.5,
+      center: cities.kyiv.coords,
+    });
+
+    const getMarker = (position) => {
+      return new google.maps.Marker({
+        position: position.coords,
+        map: map,
+        title: "Hello World!"
+      })
+    };
+
+    const markers = {
+      kyiv: getMarker(cities.kyiv),
+      kharkiv: getMarker(cities.kharkiv),
+      lviv: getMarker(cities.lviv),
+      dnipro: getMarker(cities.dnipro),
+      poltava: getMarker(cities.poltava),
+      poland: getMarker(countries.poland),
+      switzerland: getMarker(countries.switzerland),
+      netherlands: getMarker(countries.netherlands),
+      england: getMarker(countries.england),
+      italy: getMarker(countries.italy),
+    }
+  }
+</script>
+
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGt_F7AC23MHNUlb195s9-MLkWFYrXqA&callback=initMap&v=weekly"
+        async
+></script>
 </body>
 </html>
 
