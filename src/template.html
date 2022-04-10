@@ -418,10 +418,20 @@
 </footer>
 <!--   FOOTER   -->
 <script>
-  window.__mapConfig__ = <%- JSON.stringify(content.sections.map.fields) %>
+  const mapConfig = <%- JSON.stringify(content.sections.map.fields) %>;
+  function scheduleMapInit() {
+    const isMapReady = () => !!window.initMap;
+    function checkMapReadyness() {
+      if (isMapReady) {
+        window.initMap(mapConfig);
+        window.clearInterval(interval);
+      }
+    }
+    const interval = window.setInterval(checkMapReadyness, 300);
+  }
 </script>
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGt_F7AC23MHNUlb195s9-MLkWFYrXqA&language=<%= languages.current %>&callback=initMap&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGt_F7AC23MHNUlb195s9-MLkWFYrXqA&language=<%= languages.current %>&callback=scheduleMapInit&v=weekly"
         async
 ></script>
 </body>

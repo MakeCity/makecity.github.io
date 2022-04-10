@@ -1,4 +1,3 @@
-const mapConfig = window.__mapConfig__;
 // https://sites.google.com/site/gmapsdevelopment/
 const helpProviderIcon = 'https://maps.google.com/mapfiles/ms/micons/green-dot.png';
 const helpReceiverIcon = 'https://maps.google.com/mapfiles/ms/micons/red-dot.png';
@@ -33,7 +32,7 @@ const createMarker = (map, coords, content) => {
     return marker;
 };
 
-window.initMap = () => {
+window.initMap = (mapConfig) => {
     const mapInitSettings = {};
     const isAutomaticZoomOut = !mapConfig.centerMapOn;
 
