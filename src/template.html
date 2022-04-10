@@ -17,7 +17,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap"></noscript>
-
 </head>
 <body>
 
@@ -56,10 +55,6 @@
   <section class="mc-hero">
     <div class="mc-hero__content">
       <h1 class="mc-hero__title"><%= content.sections.cityCarousel.fields.title %></h1>
-      <!--
-        content.sections.cityCarousel.fields.description
-        Можно в контентфуле увеличить размер поля чтобы был не 256, а больше
-      -->
       <p class="mc-hero__text"><%= content.sections.cityCarousel.fields.description %></p>
       <% if (appConfig.isDonateSectionVisible) { %>
         <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
@@ -69,9 +64,9 @@
     <div class="mc-slider mc-hero-slider glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
-          <% content.sections.cityCarousel.fields.images.forEach(function(image) { %>
+          <% content.sections.cityCarousel.fields.slides.forEach(function(slide) { %>
           <li class="glide__slide mc-slide">
-            <img src="https:<%- image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= image.fields.title %>" class="mc-slide__img">
+            <img src="https:<%- slide.fields.image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= slide.fields.image.fields.title %>" class="mc-slide__img">
           </li>
           <% }); %>
         </ul>
@@ -88,11 +83,7 @@
   </section>
   <!--  HERO SECTION  -->
 
-
   <!--  ABOUT SECTION  -->
-  <!--
-     TODO: добавить к фото дату, чтобы было понятно когда это произошло, где-то на слайдере вверху справа + редактирование через контентфул
-  -->
   <section class="mc-help-section">
     <div class="container">
       <div class="mc-head-wrapper">
@@ -131,9 +122,12 @@
         <div class="mc-slider mc-help-report-slider glide">
           <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
-              <% content.sections.alreadyHelped.fields.carousel.fields.images.forEach(function(image) { %>
+              <% content.sections.alreadyHelped.fields.carousel.fields.slides.forEach(function(slide) { %>
                 <li class="glide__slide mc-slide mc-help-report-slider__item">
-                  <img src="https:<%- image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= image.fields.title %>" class="mc-slide__img">
+                  <img src="https:<%- slide.fields.image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= slide.fields.image.fields.title %>" class="mc-slide__img">
+                  <% if (slide.fields.date) { %>
+                    <span class="mc-slide__date"><%= slide.fields.date %></span>
+                  <% } %>
                 </li>
               <%}); %>
             </ul>
@@ -151,60 +145,29 @@
     </div>
   </section>
 
-  <!-- Strengths SECTION -->
-  <!--
-    // TODO секция с перевагами
-    // следующие переваги
-    // логистический центр - иконка (иконки взять какие-то базовые из шрифта предлагаю)
-    // надеждая доставка - иконка
-    // Наличие складов  - тут вместо иконки цифра 10
-    // Работа с больницами
-    // Хабы в Харьков - 12
-    // Анализ потреб
-    // Сильная команда
-    // Отчетность
-  -->
+  <!-- BENEFITS SECTION -->
   <section>
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2 class="">Our Strengths</h2>
+        <h2 class=""><%= content.sections.benefits.fields.title %></h2>
       </div>
 
-      <div class="row mc-donation-plans">
-        <% content.sections.plans.fields.list.forEach(function(paymentDetailItem) { %>
+      <div class="row mc-benefits">
+        <% content.sections.benefits.fields.list.forEach(function(benefitListItem) { %>
         <!--    HELP-ITEM      -->
         <div class="col-12 col-md-3">
           <div class="mc-help">
-            <span class="mc-help__size">ик</span>
+            <% if (benefitListItem.fields.note) { %>
+            <span class="mc-help__size"><%= benefitListItem.fields.note %></span>
+            <% } %>
             <p class="mc-help__desc">
-              <span class="mc-help__count">Логистический центр</span>
+              <span class="mc-help__count"><%= benefitListItem.fields.text %></span>
             </p>
           </div>
         </div>
         <!--    HELP-ITEM      -->
         <%}); %>
       </div>
-      <div class="row mc-donation-plans">
-        <% content.sections.plans.fields.list.forEach(function(paymentDetailItem) { %>
-        <!--    HELP-ITEM      -->
-        <div class="col-12 col-md-3">
-          <div class="mc-help">
-            <span class="mc-help__size"><%= paymentDetailItem.fields.price %></span>
-            <p class="mc-help__desc">
-              <span class="mc-help__count"><%= paymentDetailItem.fields.amount %></span>
-              <%= paymentDetailItem.fields.product %>
-            </p>
-          </div>
-        </div>
-        <!--    HELP-ITEM      -->
-        <%}); %>
-      </div>
-
-      <% if (appConfig.isDonateSectionVisible) { %>
-      <div class="d-flex center mc-help__donate">
-        <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
-      </div>
-      <% } %>
     </div>
   </section>
   <!-- BENEFITS SECTION -->
@@ -279,19 +242,17 @@
   <!--  Kharkiv SECTION  -->
 
   <!-- SECTION Geography -->
-  <!--
-    // новая секция
-    // внизу описано предложение по карте
-  -->
   <section>
     <div class="container">
       <div class="mc-head-wrapper">
         <h2 class="">Stellar Ukraine Geography</h2>
       </div>
-      <div id="map"></div>
+      <div class="map-holder">
+        <div class="map" id="map"></div>
+      </div>
     </div>
   </section>
-  <!-- SSECTION Geography -->
+  <!-- SECTION Geography -->
 
   <!-- SECTION DONATION PLANS -->
   <section>
@@ -325,27 +286,29 @@
   </section>
   <!-- SECTION DONATION PLANS -->
 
-  <!-- Contact -->
-  <!--
-    // TODO:
-    контакты посередине
-    телефон
-    адрес
-    почта
-   -->
-  <section>
+  <!-- Contacts -->
+  <% if (appConfig.isContactsSectionVisible) { %>
+  <section class="mc-contacts">
     <div class="container">
       <div class="mc-head-wrapper">
-        <h2 class="">COntacts</h2>
+        <h2 class=""><%= content.sections.contacts.fields.heading %></h2>
       </div>
 
-      <div class="row mc-donation-plans">
-          Contacts
-      </div>
-
+      <address>
+        <% if (content.sections.contacts.fields.email) { %>
+        <p><a href="mailto:<%= content.sections.contacts.fields.email %>"><%= content.sections.contacts.fields.email %></a></p>
+        <% } %>
+        <% if (content.sections.contacts.fields.phone) { %>
+        <p><a href="tel:<%= content.sections.contacts.fields.phone %>"><%= content.sections.contacts.fields.phone %></a></p>
+        <% } %>
+        <% if (content.sections.contacts.fields.address) { %>
+        <p><span class="mc-contacts__address"><%= content.sections.contacts.fields.address %></span></p>
+        <% } %>
+      </address>
     </div>
   </section>
-  <!-- Contact -->
+  <!-- Contacts -->
+  <% } %>
 
   <% if (appConfig.isSocialSectionVisible) { %>
     <div class="mc-social-section">
@@ -454,64 +417,11 @@
   </div>
 </footer>
 <!--   FOOTER   -->
-
-<script type="text/javascript">
-  function initMap() {
-    /*
-    * TODO Сделать страны и города разными цветами
-    *  Идея в том что мы сщ странами взаимодейтсвуем, а города обеспечиваем
-    *  Добавить название страны города
-    *  Будет круто добавить попапчик чтобы вставить туда немного деталей типа сколько мы туда доставили
-    * */
-
-    // The location of Uluru
-
-    const cities = {
-      kyiv: { coords: { lat: 50.4501, lng: 30.5234 } },
-      kharkiv: { coords: { lat: 49.9935, lng: 36.230383 } },
-      lviv: { coords: { lat: 49.839683, lng: 24.029717 } },
-      dnipro: { coords: { lat: 48.464717, lng: 35.046183 } },
-      poltava: { coords: { lat: 49.588267, lng: 34.551417 } },
-    };
-
-    const countries = {
-      poland: { coords: { lat: 51.919438, lng: 19.145136 } },
-      switzerland: { coords: { lat: 46.818188, lng: 8.227512 } },
-      netherlands: { coords: { lat: 52.132633, lng: 5.291266 } },
-      england: { coords: { lat: 52.355518, lng: -1.17432 } },
-      italy: { coords: { lat: 41.87194, lng: 12.56738 } },
-    };
-
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4.5,
-      center: cities.kyiv.coords,
-    });
-
-    const getMarker = (position) => {
-      return new google.maps.Marker({
-        position: position.coords,
-        map: map,
-        title: "Hello World!"
-      })
-    };
-
-    const markers = {
-      kyiv: getMarker(cities.kyiv),
-      kharkiv: getMarker(cities.kharkiv),
-      lviv: getMarker(cities.lviv),
-      dnipro: getMarker(cities.dnipro),
-      poltava: getMarker(cities.poltava),
-      poland: getMarker(countries.poland),
-      switzerland: getMarker(countries.switzerland),
-      netherlands: getMarker(countries.netherlands),
-      england: getMarker(countries.england),
-      italy: getMarker(countries.italy),
-    }
-  }
+<script>
+  window.__mapConfig__ = <%- JSON.stringify(content.sections.map.fields) %>
 </script>
-
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGt_F7AC23MHNUlb195s9-MLkWFYrXqA&callback=initMap&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrGt_F7AC23MHNUlb195s9-MLkWFYrXqA&language=<%= languages.current %>&callback=initMap&v=weekly"
         async
 ></script>
 </body>

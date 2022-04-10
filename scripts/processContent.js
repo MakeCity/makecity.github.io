@@ -2,8 +2,21 @@ const richHtmlRenderer = require('@contentful/rich-text-html-renderer');
 
 const renderReachTextFields = (languages, jsonContent) => {
     languages.items.forEach(({ code }) => {
+        // paymentDetailsSection
         const { paymentDetailsSection } = jsonContent[code].sections.donate.fields;
         paymentDetailsSection.fields.richText = richHtmlRenderer.documentToHtmlString(paymentDetailsSection.fields.richText);
+
+        // map section
+        const { countriesThatHelped, citiesThatGotHelp } = jsonContent[code].sections.map.fields;
+        [
+            ...countriesThatHelped,
+            ...citiesThatGotHelp,
+        ].forEach(({ fields }) => {
+            if (!fields.description) {
+                return;
+            }
+            fields.description = richHtmlRenderer.documentToHtmlString(fields.description);
+        });
     });
     return jsonContent;
 };
@@ -31,10 +44,15 @@ const processContent = (languages, jsonContent) => {
     };
     const templateDataModel = createTemplateDataModel(languages, jsonContent);
     const stringifiedContent = renderReachTextFields(languages, templateDataModel);
+    const appConfig = jsonContent[languagesSection.default].entries.items.find(entry => entry.sys.contentType.sys.id === 'appConfig');
+
+
+    // appConfig.fields.data.isContactsSectionVisible = true;
+
     return {
         languages: languagesSection,
         content: stringifiedContent,
-        appConfig: jsonContent[languagesSection.default].entries.items.find(entry => entry.sys.contentType.sys.id === 'appConfig'),
+        appConfig,
     };
 };
 
