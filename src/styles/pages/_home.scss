@@ -60,6 +60,16 @@ body {
     }
   }
 
+  &__date {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
   &:before {
     content: '';
     position: absolute;
@@ -460,7 +470,7 @@ body {
   }
 }
 
-.mc-donation-plans {
+main section:last-child {
   padding-bottom: 60px;
 
   @media screen and (min-width: 64em) {
@@ -499,4 +509,45 @@ body {
   }
 }
 
+.map-holder {
+  height: 450px;
 
+  .map {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 450px;
+  }
+}
+
+.mc-benefits {
+  padding-bottom: 60px;
+
+  @media screen and (min-width: 64em) {
+    padding-bottom: 140px;
+  }
+
+  .mc-help {
+    &__count:after {
+      content: none;
+      margin-left: 0;
+    }
+  }
+}
+
+
+.mc-contacts {
+  text-align: center;
+
+  a[href^="mailto"]::before {
+    content: "📧 ";
+  }
+
+  a[href^="tel"]::before {
+    content: "📞 ";
+  }
+
+  &__address::before {
+    content: "🏠 ";
+  }
+}
