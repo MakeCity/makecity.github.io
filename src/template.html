@@ -295,12 +295,14 @@
       </div>
 
       <address>
-        <% if (content.sections.contacts.fields.email) { %>
-        <p><a href="mailto:<%= content.sections.contacts.fields.email %>"><%= content.sections.contacts.fields.email %></a></p>
-        <% } %>
-        <% if (content.sections.contacts.fields.phone) { %>
-        <p><a href="tel:<%= content.sections.contacts.fields.phone %>"><%= content.sections.contacts.fields.phone %></a></p>
-        <% } %>
+        <div class="mc-contacts-list center d-md-flex">
+          <% if (content.sections.contacts.fields.email) { %>
+          <p><a href="mailto:<%= content.sections.contacts.fields.email %>"><%= content.sections.contacts.fields.email %></a></p>
+          <% } %>
+          <% if (content.sections.contacts.fields.phone) { %>
+          <p><a href="tel:<%= content.sections.contacts.fields.phone %>"><%= content.sections.contacts.fields.phone %></a></p>
+          <% } %>
+        </div>
         <% if (content.sections.contacts.fields.address) { %>
         <p><span class="mc-contacts__address"><%= content.sections.contacts.fields.address %></span></p>
         <% } %>

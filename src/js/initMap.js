@@ -18,7 +18,7 @@ const createMarker = (map, coords, content) => {
 
     if (content.description) {
         const infoWindow = new google.maps.InfoWindow({
-            content: content.description,
+            content: `<div class="mc-map-info">${content.description}</div>`,
         });
         marker.addListener("click", () => {
             infoWindow.open({

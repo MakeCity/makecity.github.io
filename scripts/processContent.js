@@ -46,9 +46,6 @@ const processContent = (languages, jsonContent) => {
     const stringifiedContent = renderReachTextFields(languages, templateDataModel);
     const appConfig = jsonContent[languagesSection.default].entries.items.find(entry => entry.sys.contentType.sys.id === 'appConfig');
 
-
-    // appConfig.fields.data.isContactsSectionVisible = true;
-
     return {
         languages: languagesSection,
         content: stringifiedContent,
