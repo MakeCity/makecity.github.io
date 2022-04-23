@@ -202,11 +202,19 @@
 
         <div class="col-12 col-md-offset-1 col-md-5">
           <div class="mc-donate-info">
-            <img src="images/Info.svg" alt="info icon">
+            <img src="images/card.svg" alt="card icon">
 
-            <h3><%= content.sections.donate.fields.paymentDetailsSection.fields.title %></h3>
+            <h3><%= content.sections.donate.fields.beneficiarySection.fields.title %></h3>
 
-            <%- content.sections.donate.fields.paymentDetailsSection.fields.richText %>
+            <dl>
+              <% content.sections.donate.fields.beneficiarySection.fields.beneficiaryList.forEach(function(paymentDetailItem) { %>
+              <dt><%= paymentDetailItem.fields.label %></dt>
+              <dd >
+                <%= paymentDetailItem.fields.value %>
+                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
+              </dd>
+              <%}); %>
+            </dl>
           </div>
         </div>
       </div>
