@@ -197,23 +197,6 @@
               </dd>
               <%}); %>
             </dl>
-
-            <h3><%= content.sections.donate.fields.beneficiarySection.fields.accountTitle %></h3>
-
-            <dl>
-              <% content.sections.donate.fields.beneficiarySection.fields.accountList.forEach(function(paymentDetailItem) { %>
-              <dt><%= paymentDetailItem.fields.label %></dt>
-              <dd >
-                <%= paymentDetailItem.fields.value %>
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
-              </dd>
-              <%}); %>
-            </dl>
-
-            <div class="d-flex mc-donate-info__bank-description">
-              <img src="images/UniversalBank.svg" alt="Universal Bank logo">
-              <img src="images/secure_transaction.svg" alt="secure transaction">
-            </div>
           </div>
         </div>
 
