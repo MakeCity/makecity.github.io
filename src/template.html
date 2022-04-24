@@ -182,47 +182,23 @@
       </div>
 
       <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="mc-donate-info">
-            <img src="images/card.svg" alt="card icon">
-
-            <h3><%= content.sections.donate.fields.beneficiarySection.fields.title %></h3>
-
-            <dl>
-              <% content.sections.donate.fields.beneficiarySection.fields.beneficiaryList.forEach(function(paymentDetailItem) { %>
-              <dt><%= paymentDetailItem.fields.label %></dt>
-              <dd >
-                <%= paymentDetailItem.fields.value %>
-                <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
-              </dd>
-              <%}); %>
-            </dl>
+        <% content.sections.donate.fields.beneficiarySections.forEach(function(beneficiarySection) { %>
+          <div class="col-12 col-md-offset-1 col-md-5">
+            <div class="mc-donate-info">
+              <img src="images/card.svg" alt="card icon">
+              <h3><%= beneficiarySection.fields.title %></h3>
+              <dl>
+                <% beneficiarySection.fields.beneficiaryList.forEach(function(paymentDetailItem) { %>
+                <dt><%= paymentDetailItem.fields.label %></dt>
+                <dd >
+                  <%= paymentDetailItem.fields.value %>
+                  <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="<%= paymentDetailItem.fields.value %>" title="copy"></button>
+                </dd>
+                <%}); %>
+              </dl>
+            </div>
           </div>
-        </div>
-
-        <div class="col-12 col-md-offset-1 col-md-5">
-          <div class="mc-donate-info">
-            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTgiIGhlaWdodD0iNDUiIHZpZXdCb3g9IjAgMCA1OCA0NSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOS43NSAxLjc1aDM4LjVjNC41NDggMCA4LjI1IDMuNzAyIDguMjUgOC4yNXYyNC43NWMwIDQuNTQ4LTMuNzAyIDguMjUtOC4yNSA4LjI1SDkuNzVjLTQuNTQ4IDAtOC4yNS0zLjcwMi04LjI1LTguMjVWMTBjMC00LjU0OCAzLjcwMi04LjI1IDguMjUtOC4yNVptMCA1LjVoMzguNUEyLjc1MyAyLjc1MyAwIDAgMSA1MSAxMHYyLjc1SDdWMTBhMi43NTMgMi43NTMgMCAwIDEgMi43NS0yLjc1Wm0zOC41IDMwLjI1QTIuNzUzIDIuNzUzIDAgMCAwIDUxIDM0Ljc1di0xNi41SDd2MTYuNWEyLjc1MyAyLjc1MyAwIDAgMCAyLjc1IDIuNzVoMzguNVptLTMzLTEzLjc1YTIuNzUgMi43NSAwIDEgMCAwIDUuNWg1LjVhMi43NSAyLjc1IDAgMSAwIDAtNS41aC01LjVaIiBmaWxsPSIjMDAwIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTAgMGg1OHY0NUgweiIvPjwvY2xpcFBhdGg+PC9kZWZzPjwvc3ZnPg==" alt="card icon">
-            <h3>Beneficiary EUR</h3>
-            <dl>
-              <dt>Company Name</dt>
-              <dd>Charitable Organization Charitable Foundation "Stellar Ukraine" <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="Charitable Organization  Charitable Foundation &quot;Stellar Ukraine&quot;" title="copy"></button>
-              </dd>
-              <dt>IBAN</dt>
-              <dd>UA 453052990000026004041028512 <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="UA453052990000026004041028512" title="copy"></button>
-              </dd>
-              <dt>Account No</dt>
-              <dd>400886700401 <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="400886700401" title="copy"></button>
-              </dd>
-              <dt>Receiver</dt>
-              <dd>UA 79000, Lviv, Chervonoyi Kalyny ave., 58 <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="UA 79000, Lviv, Chervonoyi Kalyny ave., 58 " title="copy"></button>
-              </dd>
-              <dt>Swift code</dt>
-              <dd>PBANUA2X <button class="mc-copy-btn" aria-label="copy" data-copy-tooltip="Copied" data-copy="PBANUA2X" title="copy"></button>
-              </dd>
-            </dl>
-          </div>
-        </div>
+        <% }); %>
       </div>
     </div>
   </section>
