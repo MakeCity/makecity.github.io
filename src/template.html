@@ -53,26 +53,28 @@
 <main>
   <!--  HERO SECTION  -->
   <section class="mc-hero">
-    <div class="mc-hero__content">
-      <h1 class="mc-hero__title"><%= content.sections.cityCarousel.fields.title %></h1>
-      <p class="mc-hero__text"><%= content.sections.cityCarousel.fields.description %></p>
-      <% if (appConfig.isDonateSectionVisible) { %>
+    <div class="mc-hero__content-holder">
+      <div class="mc-hero__content">
+        <h1 class="mc-hero__title"><%= content.sections.cityCarousel.fields.title %></h1>
+        <p class="mc-hero__text"><%= content.sections.cityCarousel.fields.description %></p>
+        <% if (appConfig.isDonateSectionVisible) { %>
         <a href="#donate" class="mc-btn mc-hero__btn mc-donate-button"><%= content.sections.donateBtnTitle %></a>
-      <% } %>
-    </div>
-    <!--    SLIDER     -->
-    <div class="mc-slider mc-hero-slider glide">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">
-          <% content.sections.cityCarousel.fields.slides.forEach(function(slide) { %>
-          <li class="glide__slide mc-slide">
-            <img src="https:<%- slide.fields.image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= slide.fields.image.fields.title %>" class="mc-slide__img">
-          </li>
-          <% }); %>
-        </ul>
-        <div class="glide__arrows" data-glide-el="controls">
-          <button class="glide__arrow glide__arrow--prev" aria-label="prev slide" data-glide-dir="<"></button>
-          <button class="glide__arrow glide__arrow--next" aria-label="next slide" data-glide-dir=">"></button>
+        <% } %>
+      </div>
+      <!--    SLIDER     -->
+      <div class="mc-slider mc-hero-slider glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <% content.sections.cityCarousel.fields.slides.forEach(function(slide) { %>
+            <li class="glide__slide mc-slide">
+              <img src="https:<%- slide.fields.image.fields.file.url %>?fm=jpg&fl=progressive&q=80" alt="<%= slide.fields.image.fields.title %>" class="mc-slide__img">
+            </li>
+            <% }); %>
+          </ul>
+          <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--prev" aria-label="prev slide" data-glide-dir="<"></button>
+            <button class="glide__arrow glide__arrow--next" aria-label="next slide" data-glide-dir=">"></button>
+          </div>
         </div>
       </div>
     </div>

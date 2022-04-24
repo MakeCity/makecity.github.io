@@ -83,6 +83,10 @@ body {
 
 .mc-hero {
   position: relative;
+
+  &__content-holder {
+    position: relative;
+  }
 }
 
 .mc-hero__content {
