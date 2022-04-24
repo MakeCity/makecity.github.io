@@ -87,6 +87,11 @@ body {
   &__content-holder {
     position: relative;
   }
+
+  .mc-donate-button--mobile {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .mc-hero__content {
@@ -289,7 +294,6 @@ body {
 
 // mc-donate
 .mc-donate {
-  overflow: hidden;
   padding-bottom: 100px;
 
   .mc-head-wrapper {
