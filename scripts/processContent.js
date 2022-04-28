@@ -2,6 +2,10 @@ const richHtmlRenderer = require('@contentful/rich-text-html-renderer');
 
 const renderReachTextFields = (languages, jsonContent) => {
     languages.items.forEach(({ code }) => {
+        // paymentClarification
+        const paymentClarificationFields = jsonContent[code].sections.paymentClarification.fields;
+        paymentClarificationFields.description = richHtmlRenderer.documentToHtmlString(paymentClarificationFields.description);
+
         // map section
         const { countriesThatHelped, citiesThatGotHelp } = jsonContent[code].sections.map.fields;
         [
