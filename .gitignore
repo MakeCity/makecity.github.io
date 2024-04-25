@@ -4,6 +4,7 @@
 
 # phpstorm, webstorm
 .idea/
+.ws/
 
 
 # sublime and other ide
